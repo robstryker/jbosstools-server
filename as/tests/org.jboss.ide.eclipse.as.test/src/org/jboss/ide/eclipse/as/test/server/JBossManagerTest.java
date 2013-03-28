@@ -74,7 +74,7 @@ public class JBossManagerTest {
 
 	private static class JBoss71Manager implements IJBoss7ManagerService {
 
-		public String execute(IAS7ManagementDetails details, String request) throws Exception {
+		public String execute(IAS7ManagementDetails details, String request) throws JBoss7ManangerException {
 			throw new UnsupportedOperationException();
 		}
 		public IJBoss7DeploymentResult deployAsync(IAS7ManagementDetails details, String deploymentName, File file,
@@ -92,17 +92,12 @@ public class JBossManagerTest {
 			throw new UnsupportedOperationException();
 		}
 
-		public IJBoss7DeploymentResult syncUndeploy(IAS7ManagementDetails details, String deploymentName, boolean removeFile,
-				IProgressMonitor monitor) throws JBoss7ManangerException {
-			throw new UnsupportedOperationException();
-		}
-
 		public JBoss7DeploymentState getDeploymentState(IAS7ManagementDetails details, String deploymentName)
 				throws JBoss7ManangerException {
 			throw new UnsupportedOperationException();
 		}
 		
-		public JBoss7ServerState getServerState(IAS7ManagementDetails details) throws Exception {
+		public JBoss7ServerState getServerState(IAS7ManagementDetails details) throws JBoss7ManangerException {
 			throw new UnsupportedOperationException();
 		}
 
@@ -116,7 +111,34 @@ public class JBossManagerTest {
 		public void dispose() {
 		}
 
-		public void init() throws Exception {
+		public void init() throws JBoss7ManangerException {
+		}
+		public IJBoss7DeploymentResult undeploySync(
+				IAS7ManagementDetails details, String deploymentName,
+				boolean removeFile, IProgressMonitor monitor)
+				throws JBoss7ManangerException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public IJBoss7DeploymentResult addDeployment(
+				IAS7ManagementDetails details, String deploymentName,
+				File file, IProgressMonitor monitor)
+				throws JBoss7ManangerException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public IJBoss7DeploymentResult removeDeployment(
+				IAS7ManagementDetails details, String deploymentName,
+				IProgressMonitor monitor) throws JBoss7ManangerException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public IJBoss7DeploymentResult replaceDeployment(
+				IAS7ManagementDetails details, String deploymentName,
+				File file, IProgressMonitor monitor)
+				throws JBoss7ManangerException {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 	

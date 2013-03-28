@@ -49,7 +49,6 @@ import org.jboss.as.controller.client.helpers.standalone.ServerDeploymentManager
 import org.jboss.as.controller.client.helpers.standalone.ServerDeploymentPlanResult;
 import org.jboss.as.protocol.StreamUtils;
 import org.jboss.dmr.ModelNode;
-import org.jboss.ide.eclipse.as.internal.management.as71.util.AS7ManagerUtil;
 import org.jboss.ide.eclipse.as.management.core.IAS7ManagementDetails;
 import org.jboss.ide.eclipse.as.management.core.IJBoss7DeploymentResult;
 import org.jboss.ide.eclipse.as.management.core.JBoss7DeploymentState;
@@ -67,11 +66,15 @@ public class AS71Manager {
 	private ServerDeploymentManager manager;
 	private IAS7ManagementDetails details;
 
-	public AS71Manager(IAS7ManagementDetails details) throws UnknownHostException {
-		this.details = details;
-		this.client = ModelControllerClient.Factory.create(details.getHost(), details.getManagementPort(),
-				getCallbackHandler());
-		this.manager = ServerDeploymentManager.Factory.create(client);
+	public AS71Manager(IAS7ManagementDetails details) throws JBoss7ManangerException {
+		try {
+			this.details = details;
+			this.client = ModelControllerClient.Factory.create(details.getHost(), details.getManagementPort(),
+					getCallbackHandler());
+			this.manager = ServerDeploymentManager.Factory.create(client);
+		} catch(UnknownHostException uhe) {
+			throw new JBoss7ManangerException(uhe);
+		}
 	}
 
 	protected CallbackHandler getCallbackHandler() {
