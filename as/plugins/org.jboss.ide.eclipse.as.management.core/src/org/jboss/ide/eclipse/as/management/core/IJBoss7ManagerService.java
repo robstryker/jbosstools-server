@@ -31,13 +31,15 @@ public interface IJBoss7ManagerService {
 	 * @param port     The port
 	 * @param name     The deployment's name
 	 * @param file     The file to be deployed
+	 * @param add      Add the deployment? True if the deployment is not 
+	 * 				   already added, false if you just want to start the existing deployment
 	 * @param monitor  The progress monitor
 	 * 
 	 * @return Not sure what to return yet
 	 * @throws JBoss7ManangerException
 	 */
 	public IJBoss7DeploymentResult deployAsync(IAS7ManagementDetails details,
-			String deploymentName, File file, IProgressMonitor monitor) throws JBoss7ManangerException;
+			String deploymentName, File file, boolean add, IProgressMonitor monitor) throws JBoss7ManangerException;
 
 	/**
 	 * Synchronously deploy a file to a server
@@ -46,13 +48,15 @@ public interface IJBoss7ManagerService {
 	 * @param port    The port
 	 * @param name    The deployment's name
 	 * @param file    The file to be deployed
+	 * @param add     Add the deployment? True if the deployment is not 
+	 * 				  already added, false if you just want to start the existing deployment
 	 * @param monitor The progress monitor
 	 * 
 	 * @return Not sure what to return yet
 	 * @throws JBoss7ManangerException
 	 */
 	public IJBoss7DeploymentResult deploySync(IAS7ManagementDetails details,
-			String deploymentName, File file, IProgressMonitor monitor) throws JBoss7ManangerException;
+			String deploymentName, File file, boolean add, IProgressMonitor monitor) throws JBoss7ManangerException;
 
 	/**
 	 * Asynchronously undeploy a file to a server

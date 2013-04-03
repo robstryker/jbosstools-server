@@ -80,10 +80,10 @@ public class JBoss71ManagerService implements IJBoss7ManagerService {
 	 * They dispose the manager before the result has come through
 	 */
 	public IJBoss7DeploymentResult deployAsync(IAS7ManagementDetails details, String deploymentName,
-			File file, IProgressMonitor monitor) throws JBoss7ManangerException {
+			File file, boolean add, IProgressMonitor monitor) throws JBoss7ManangerException {
 		AS71Manager manager = new AS71Manager(details);
 		try {
-			IJBoss7DeploymentResult result = manager.deploy(deploymentName, file);
+			IJBoss7DeploymentResult result = manager.deploy(deploymentName, file, add);
 			return result;
 		} finally {
 			manager.dispose();
@@ -97,7 +97,7 @@ public class JBoss71ManagerService implements IJBoss7ManagerService {
 			boolean removeFile, IProgressMonitor monitor) throws JBoss7ManangerException {
 		AS71Manager manager = new AS71Manager(details);
 		try {
-			IJBoss7DeploymentResult result = manager.undeploy(deploymentName);
+			IJBoss7DeploymentResult result = manager.undeploy(deploymentName, removeFile);
 			return result;
 		} finally {
 			manager.dispose();
@@ -105,10 +105,10 @@ public class JBoss71ManagerService implements IJBoss7ManagerService {
 	}
 
 	public IJBoss7DeploymentResult deploySync(IAS7ManagementDetails details, String deploymentName,
-			File file, IProgressMonitor monitor) throws JBoss7ManangerException {
+			File file, boolean add, IProgressMonitor monitor) throws JBoss7ManangerException {
 		AS71Manager manager = new AS71Manager(details);
 		try {
-			IJBoss7DeploymentResult result = manager.deploySync(deploymentName, file, monitor);
+			IJBoss7DeploymentResult result = manager.deploySync(deploymentName, file, add, monitor);
 			return result;
 		} finally {
 			manager.dispose();
@@ -119,7 +119,7 @@ public class JBoss71ManagerService implements IJBoss7ManagerService {
 			boolean removeFile, IProgressMonitor monitor) throws JBoss7ManangerException {
 		AS71Manager manager = new AS71Manager(details);
 		try {
-			IJBoss7DeploymentResult result = manager.undeploySync(deploymentName, monitor);
+			IJBoss7DeploymentResult result = manager.undeploySync(deploymentName, removeFile, monitor);
 			return result;
 		} finally {
 			manager.dispose();

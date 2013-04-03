@@ -47,7 +47,6 @@ import org.jboss.as.controller.client.helpers.standalone.DeploymentAction;
 import org.jboss.as.controller.client.helpers.standalone.DeploymentPlanBuilder;
 import org.jboss.as.controller.client.helpers.standalone.ServerDeploymentManager;
 import org.jboss.as.controller.client.helpers.standalone.ServerDeploymentPlanResult;
-import org.jboss.as.protocol.StreamUtils;
 import org.jboss.dmr.ModelNode;
 import org.jboss.ide.eclipse.as.management.core.IAS7ManagementDetails;
 import org.jboss.ide.eclipse.as.management.core.IJBoss7DeploymentResult;
@@ -112,24 +111,27 @@ public class AS71Manager {
 		}
 	}
 	
-	public IJBoss7DeploymentResult undeploySync(String name, IProgressMonitor monitor)
+	public IJBoss7DeploymentResult undeploySync(String name, boolean removeFile, IProgressMonitor monitor)
 			throws JBoss7ManangerException {
-		IJBoss7DeploymentResult result = undeploy(name);
+		IJBoss7DeploymentResult result = undeploy(name, removeFile);
 		result.getStatus();
 		return result;
 	}
 
-	public IJBoss7DeploymentResult deploySync(String name, File file, IProgressMonitor monitor)
+	public IJBoss7DeploymentResult deploySync(String name, File file, boolean add, IProgressMonitor monitor)
 			throws JBoss7ManangerException {
-		IJBoss7DeploymentResult result = deploy(name, file);
+		IJBoss7DeploymentResult result = deploy(name, file, add);
 		result.getStatus();
 		return result;
 	}
 
-	public IJBoss7DeploymentResult undeploy(String name) throws JBoss7ManangerException {
+	public IJBoss7DeploymentResult undeploy(String name, boolean removeFile) throws JBoss7ManangerException {
 		try {
 			DeploymentPlanBuilder builder = manager.newDeploymentPlan();
-			builder = builder.undeploy(name).andRemoveUndeployed();
+			if( removeFile )
+				builder = builder.undeploy(name).andRemoveUndeployed();
+			else 
+				builder = builder.undeploy(name);
 			return new DeploymentOperationResult(builder.getLastAction(), manager.execute(builder.build()));
 		} catch (Exception e) {
 			throw new JBoss7ManangerException(e);
@@ -146,8 +148,14 @@ public class AS71Manager {
 		}
 	}
 
+	/**
+	 * Add and deploy the provided file
+	 * @param file
+	 * @return
+	 * @throws JBoss7ManangerException
+	 */
 	public IJBoss7DeploymentResult deploy(File file) throws JBoss7ManangerException {
-		return deploy(file.getName(), file);
+		return deploy(file.getName(), file, true);
 	}
 
 	public IJBoss7DeploymentResult add(String name, File file) throws JBoss7ManangerException {
@@ -158,9 +166,12 @@ public class AS71Manager {
 		}
 	}
 
-	public IJBoss7DeploymentResult deploy(String name, File file) throws JBoss7ManangerException {
+	public IJBoss7DeploymentResult deploy(String name, File file, boolean add) throws JBoss7ManangerException {
 		try {
-			return execute(manager.newDeploymentPlan().add(name, file).andDeploy());
+			if( add )
+				return execute(manager.newDeploymentPlan().add(name, file).andDeploy());
+			else
+				return execute(manager.newDeploymentPlan().deploy(name));
 		} catch (IOException e) {
 			throw new JBoss7ManangerException(e);
 		}

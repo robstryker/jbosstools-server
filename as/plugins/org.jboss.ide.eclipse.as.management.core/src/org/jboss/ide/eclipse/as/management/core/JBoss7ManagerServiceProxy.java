@@ -41,14 +41,16 @@ public class JBoss7ManagerServiceProxy extends ServiceTracker<IJBoss7ManagerServ
 		checkedGetService().init();
 	}
 
-	public IJBoss7DeploymentResult deployAsync(IAS7ManagementDetails details, String deploymentName, File file,
+	public IJBoss7DeploymentResult deployAsync(IAS7ManagementDetails details, String deploymentName, 
+			File file, boolean add,
 			IProgressMonitor monitor) throws JBoss7ManangerException {
-		return checkedGetService().deployAsync(details, deploymentName, file, monitor);
+		return checkedGetService().deployAsync(details, deploymentName, file, add, monitor);
 	}
 
-	public IJBoss7DeploymentResult deploySync(IAS7ManagementDetails details, String deploymentName, File file,
+	public IJBoss7DeploymentResult deploySync(IAS7ManagementDetails details, String deploymentName,
+			File file, boolean add,
 			IProgressMonitor monitor) throws JBoss7ManangerException {
-		return checkedGetService().deploySync(details, deploymentName, file, monitor);
+		return checkedGetService().deploySync(details, deploymentName, file, add, monitor);
 	}
 
 	public IJBoss7DeploymentResult undeployAsync(IAS7ManagementDetails details, String deploymentName, boolean removeFile,

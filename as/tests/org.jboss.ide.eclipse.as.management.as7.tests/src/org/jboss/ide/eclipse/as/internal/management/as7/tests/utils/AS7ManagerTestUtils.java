@@ -27,14 +27,13 @@ import java.net.UnknownHostException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.jboss.ide.eclipse.as.core.server.v7.management.AS7ManagementDetails;
 import org.jboss.ide.eclipse.as.management.core.IAS7ManagementDetails;
 import org.jboss.ide.eclipse.as.management.core.IJBoss7DeploymentResult;
 import org.jboss.ide.eclipse.as.management.core.IJBoss7ManagerService;
 import org.jboss.ide.eclipse.as.management.core.JBoss7ManagerUtil;
 import org.jboss.ide.eclipse.as.management.core.JBoss7ManangerException;
-import org.jboss.ide.eclipse.as.test.server.JBossManagerTest;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.InvalidSyntaxException;
 
 /**
  * @author André Dietisheim
@@ -166,9 +165,29 @@ public class AS7ManagerTestUtils {
 	}
 	
 	public static IAS7ManagementDetails createStandardDetails() {
-		return new JBossManagerTest.MockAS7ManagementDetails(LOCALHOST, MGMT_PORT);
+		return new MockAS7ManagementDetails(LOCALHOST, MGMT_PORT);
 	}
 	
+	public static class MockAS7ManagementDetails extends AS7ManagementDetails {
+		private String host;
+		private int port;
+		public MockAS7ManagementDetails(String host, int port) {
+			super(null);
+			this.host = host;
+			this.port = port;
+		}
+		public String getHost() {
+			return host;
+		}
+		
+		public int getManagementPort() {
+			return port;
+		}
+		public String[] handleCallbacks(String[] prompts) throws UnsupportedOperationException {
+			return new String[]{};
+		}
+	}
+
 	public static IJBoss7ManagerService findService(String runtimeType) {
 		try {
 			return JBoss7ManagerUtil.getService(runtimeType);

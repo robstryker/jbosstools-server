@@ -105,7 +105,7 @@ public class AS7ManagerIntegrationTest extends AssertUtility {
 		try {
 			
 			service.deploySync(AS7ManagerTestUtils.createStandardDetails(), 
-					warFile.getName(), warFile, new NullProgressMonitor());
+					warFile.getName(), warFile, true, new NullProgressMonitor());
 
 			String response = AS7ManagerTestUtils.waitForRespose(
 					"minimalistic", AS7ManagerTestUtils.LOCALHOST, AS7ManagerTestUtils.WEB_PORT);
@@ -144,7 +144,7 @@ public class AS7ManagerIntegrationTest extends AssertUtility {
 		File warFile = AS7ManagerTestUtils.getWarFile(AS7ManagerTestUtils.MINIMALISTIC_WAR);
 		try {
 			service.deploySync(AS7ManagerTestUtils.createStandardDetails(),
-					deploymentName, warFile, new NullProgressMonitor());
+					deploymentName, warFile, true, new NullProgressMonitor());
 			JBoss7DeploymentState state = service.getDeploymentState(AS7ManagerTestUtils.createStandardDetails(), deploymentName);
 			assertNotNull(state);
 			assertTrue(areEqual(state, JBoss7DeploymentState.STARTED));
