@@ -20,10 +20,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	ParametizedSuite.class,
-	UtilsSuite.class,
+//	ParametizedSuite.class,
+//	UtilsSuite.class,
 	PollThreadTest.class,
-	ClasspathSuite.class
+//	ClasspathSuite.class
 })
 public class ASToolsTestSuite {
 }
