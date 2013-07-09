@@ -17,5 +17,10 @@ public class Wildfly8Server extends JBoss7Server {
 	public void setDefaults(IProgressMonitor monitor) {
 		super.setDefaults(monitor);
 		setAttribute(IJBossToolingConstants.STARTUP_POLLER_KEY, JBoss7ManagerServicePoller.WILDFLY_POLLER_ID);
+		
+		// TODO these should be removed if we can find a valid xpath to discover the 9990
+		setAttribute(IJBossToolingConstants.AS7_MANAGEMENT_PORT_DETECT, false);
+		setAttribute(IJBossToolingConstants.AS7_MANAGEMENT_PORT, "9990"); //$NON-NLS-1$
+
 	}
 }
