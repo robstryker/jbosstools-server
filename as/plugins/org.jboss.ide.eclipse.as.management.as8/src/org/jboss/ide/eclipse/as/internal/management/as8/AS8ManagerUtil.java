@@ -10,14 +10,14 @@
  ******************************************************************************/ 
 package org.jboss.ide.eclipse.as.internal.management.as8;
 
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.CHILD_TYPE;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.DEPLOYMENT;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.FAILURE_DESCRIPTION;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.OUTCOME;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.REQUEST_PROPERTIES;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.RESULT;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.SUCCESS;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.CHILD_TYPE;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.DEPLOYMENT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.FAILURE_DESCRIPTION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.OUTCOME;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.REQUEST_PROPERTIES;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.RESULT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.SUCCESS;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +113,7 @@ public class AS8ManagerUtil {
 			builder.addProperty(CHILD_TYPE, DEPLOYMENT);
 			request = builder.buildRequest();
 		} catch (OperationFormatException e) {
-			throw new IllegalStateException(AS7Messages.FailedToBuildOperation, e);
+			throw new IllegalStateException(Messages.FailedToBuildOperation, e);
 		}
 
 		ModelNode outcome = client.execute(request);
@@ -152,7 +152,7 @@ public class AS8ManagerUtil {
 			}
 			else {
 				throw new JBoss7ManangerException(NLS.bind(
-						AS7Messages.OperationOutcomeToString, result.get(OUTCOME).asString()));
+						Messages.OperationOutcomeToString, result.get(OUTCOME).asString()));
 			}
 		} catch (IOException e) {
 			throw new JBoss7ManangerException(e);

@@ -10,21 +10,6 @@
  ******************************************************************************/
 package org.jboss.ide.eclipse.as.internal.management.as8;
 
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.ADDRESS;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.CHILD_TYPE;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.DEPLOYMENT;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.ENABLED;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.FAILURE_DESCRIPTION;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.NAME;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.OP;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.OP_ADDR;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.READ_ATTRIBUTE_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.READ_RESOURCE_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.RESULT;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.SERVER_STATE;
-import static org.jboss.ide.eclipse.as.internal.management.as8.ModelDescriptionConstants.SHUTDOWN;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -54,14 +39,26 @@ import org.jboss.ide.eclipse.as.management.core.JBoss7DeploymentState;
 import org.jboss.ide.eclipse.as.management.core.JBoss7ManangerException;
 import org.jboss.ide.eclipse.as.management.core.JBoss7ServerState;
 
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.OP;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.DEPLOYMENT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_RESOURCE_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.ADDRESS;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.ENABLED;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.SHUTDOWN;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.FAILURE_DESCRIPTION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.NAME;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.SERVER_STATE;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_ATTRIBUTE_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.RESULT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.CHILD_TYPE;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.OP_ADDR;
+
 /**
  * @author André Dietisheim
  */
 public class AS8Manager {
-
-	public static final int MGMT_PORT = 9999;
 	public static final int DEFAULT_REQUEST_TIMEOUT = 5000;
-
 	private ModelControllerClient client;
 	private ServerDeploymentManager manager;
 	private IAS7ManagementDetails details;
@@ -234,7 +231,7 @@ public class AS8Manager {
 		Boolean enabled = AS8ManagerUtil.getBooleanProperty(ENABLED, result);
 		if (enabled == null) {
 			throw new JBoss7ManangerException(
-					NLS.bind(AS7Messages.ModuleStateEvaluationFailed, name));
+					NLS.bind(Messages.ModuleStateEvaluationFailed, name));
 		} else if (enabled) {
 			return JBoss7DeploymentState.STARTED;
 		} else {
@@ -325,7 +322,7 @@ public class AS8Manager {
 			ModelNode response = client.execute(node);
 			if (!AS8ManagerUtil.isSuccess(response)) {
 				throw new JBoss7ManangerException(
-						NLS.bind(AS7Messages.OperationOnAddressFailed,
+						NLS.bind(Messages.OperationOnAddressFailed,
 								new Object[] { node.get(OP),
 										node.get(ADDRESS),
 										response.get(FAILURE_DESCRIPTION) }

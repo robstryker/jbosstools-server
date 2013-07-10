@@ -65,25 +65,25 @@ public class DeploymentOperationResult implements IJBoss7DeploymentResult {
 		switch (actionResult.getResult()) {
 		case NOT_EXECUTED:
 			status = createStatus(IStatus.ERROR, NLS.bind(
-					AS7Messages.OperationOnUnitNotExecuted, 
+					Messages.OperationOnUnitNotExecuted, 
 					actionName, deploymentName));
 			break;
 		case EXECUTED:
 			status = Status.OK_STATUS;
 			break;
 		case FAILED:
-			status = createStatus(IStatus.ERROR, NLS.bind(AS7Messages.OperationOnUnitFailed, 
+			status = createStatus(IStatus.ERROR, NLS.bind(Messages.OperationOnUnitFailed, 
 					actionName, deploymentName));
 			break;
 		case ROLLED_BACK:
 			status = createStatus(IStatus.ERROR, 
-					NLS.bind(AS7Messages.OperationOnUnitRolledBack,
+					NLS.bind(Messages.OperationOnUnitRolledBack,
 							actionName, deploymentName));
 			break;
 		case CONFIGURATION_MODIFIED_REQUIRES_RESTART:
 			status = createStatus(
 					IStatus.WARNING,
-					NLS.bind(AS7Messages.OperationNotExecConfigRequiresRestart,
+					NLS.bind(Messages.OperationNotExecConfigRequiresRestart,
 							actionName, deploymentName));
 			break;
 		}

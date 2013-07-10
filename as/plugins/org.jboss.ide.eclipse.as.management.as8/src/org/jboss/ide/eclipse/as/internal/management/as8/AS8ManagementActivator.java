@@ -19,7 +19,7 @@ import org.osgi.framework.BundleContext;
 public class AS8ManagementActivator extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.jboss.ide.eclipse.as.management.as71"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.jboss.ide.eclipse.as.management.as8"; //$NON-NLS-1$
 
 	// The shared instance
 	private static AS8ManagementActivator plugin;

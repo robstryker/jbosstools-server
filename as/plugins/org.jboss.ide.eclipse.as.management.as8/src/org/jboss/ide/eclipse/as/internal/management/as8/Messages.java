@@ -12,7 +12,7 @@ package org.jboss.ide.eclipse.as.internal.management.as8;
 
 import org.eclipse.osgi.util.NLS;
 
-public class AS7Messages extends NLS {
+public class Messages extends NLS {
 	public static String ModuleStateEvaluationFailed;
 	public static String OperationOnAddressFailed;
 	public static String FailedToBuildOperation;
@@ -22,8 +22,8 @@ public class AS7Messages extends NLS {
 	public static String OperationOnUnitRolledBack;
 	public static String OperationNotExecConfigRequiresRestart;
 	static {
-		NLS.initializeMessages("org.jboss.ide.eclipse.as.internal.management.as71.AS7Messages", //$NON-NLS-1$ 
-				AS7Messages.class);
+		NLS.initializeMessages("org.jboss.ide.eclipse.as.internal.management.as8.Messages", //$NON-NLS-1$ 
+				Messages.class);
 	}
 
 }
