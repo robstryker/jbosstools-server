@@ -238,12 +238,6 @@ public class AS8Manager {
 			return JBoss7DeploymentState.STOPPED;
 		}
 	}
-
-	@Deprecated
-	public void addDeploymentDirectory(String path) {
-		
-	}
-
 	
 	/**
 	 * Shuts the server down.
@@ -339,7 +333,8 @@ public class AS8Manager {
 		try {
 			client.execute(node);
 		} catch (Exception e) {
-			// AS 7.0 servers fails in finishing the client calls thus we will see IOException when calling shutdown that we should ignore.
+			// During shutdown, some connections may be closed prematurely
+			// It is acceptable to ignore these errors. 
 			if (!isConnectionCloseException(e)) {
 				throw new JBoss7ManangerException(e);
 			}

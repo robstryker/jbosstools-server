@@ -30,8 +30,6 @@ import org.jboss.ide.eclipse.as.management.core.JBoss7ManangerException;
  *
  */
 public class DeploymentOperationResult implements IJBoss7DeploymentResult {
-
-	public static final String BUNDLE_ID = "org.jboss.ide.eclipse.as.management.as71"; //$NON-NLS-1$
 	
 	private Future<ServerDeploymentPlanResult> planResult;
 	private DeploymentAction action;
@@ -43,8 +41,9 @@ public class DeploymentOperationResult implements IJBoss7DeploymentResult {
 		this.planResult = planResult;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jboss.ide.eclipse.as.management.as7.deployment.IDeploymentResult#getStatus()
+	/*
+	 * (non-Javadoc)
+	 * @see org.jboss.ide.eclipse.as.management.core.IJBoss7DeploymentResult#getStatus()
 	 */
 	@Override
 	public IStatus getStatus() throws JBoss7ManangerException {
@@ -91,7 +90,7 @@ public class DeploymentOperationResult implements IJBoss7DeploymentResult {
 	}
 
 	private IStatus createStatus(int severity, String messagePattern, Object... messageArguments) {
-		return new Status(severity, BUNDLE_ID, MessageFormat.format(
+		return new Status(severity, AS8ManagementActivator.PLUGIN_ID, MessageFormat.format(
 				messagePattern, messageArguments));
 	}
 }
