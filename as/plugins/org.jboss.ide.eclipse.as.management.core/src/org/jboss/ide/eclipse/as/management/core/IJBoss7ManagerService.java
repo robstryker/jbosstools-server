@@ -23,7 +23,8 @@ public interface IJBoss7ManagerService {
 	
 	// I believe this is unused
 	public static final String AS_VERSION_720 = "720"; //$NON-NLS-1$
-	public static final String AS_VERSION_800 = "8.0.0"; //$NON-NLS-1$
+	public static final String WILDFLY_VERSION_800 = "8.0.0"; //$NON-NLS-1$
+	
 	public static final int MGMT_PORT = 9999;
 
 	public void init() throws JBoss7ManangerException;
