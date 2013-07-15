@@ -10,14 +10,14 @@
  ******************************************************************************/ 
 package org.jboss.ide.eclipse.as.internal.management.as71;
 
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.CHILD_TYPE;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.DEPLOYMENT;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.FAILURE_DESCRIPTION;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.OUTCOME;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.REQUEST_PROPERTIES;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.RESULT;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.SUCCESS;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.CHILD_TYPE;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.DEPLOYMENT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.FAILURE_DESCRIPTION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.OUTCOME;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.REQUEST_PROPERTIES;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.RESULT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.SUCCESS;
 
 import java.io.IOException;
 import java.util.ArrayList;

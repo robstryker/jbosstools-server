@@ -10,20 +10,20 @@
  ******************************************************************************/
 package org.jboss.ide.eclipse.as.internal.management.as71;
 
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.ADDRESS;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.CHILD_TYPE;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.DEPLOYMENT;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.ENABLED;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.FAILURE_DESCRIPTION;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.NAME;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.OP;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.OP_ADDR;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.READ_ATTRIBUTE_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.READ_RESOURCE_OPERATION;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.RESULT;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.SERVER_STATE;
-import static org.jboss.ide.eclipse.as.internal.management.as71.ModelDescriptionConstants.SHUTDOWN;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.ADDRESS;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.CHILD_TYPE;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.DEPLOYMENT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.ENABLED;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.FAILURE_DESCRIPTION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.NAME;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.OP;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.OP_ADDR;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_ATTRIBUTE_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_CHILDREN_NAMES_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.READ_RESOURCE_OPERATION;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.RESULT;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.SERVER_STATE;
+import static org.jboss.ide.eclipse.as.management.core.ModelDescriptionConstants.SHUTDOWN;
 
 import java.io.File;
 import java.io.IOException;

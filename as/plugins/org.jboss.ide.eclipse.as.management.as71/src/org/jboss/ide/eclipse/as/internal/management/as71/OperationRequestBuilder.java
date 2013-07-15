@@ -25,8 +25,6 @@ import org.jboss.dmr.ModelNode;
 import org.jboss.ide.eclipse.as.management.core.OperationFormatException;
 
 /**
- * TODO this is not used for now...
- *
  * @author Alexey Loubyansky
  */
 public interface OperationRequestBuilder {
