@@ -160,7 +160,7 @@ public class DirectoryScannerFactory {
 
 		 // Made protected to be over-ridden for workspace-style VFS
 	    @Override
-	    protected ITreeNode[] listFiles(ITreeNode file) {
+	    protected ITreeNode[] listChildren(ITreeNode file) {
 	    	return list2((FileWrapper)file);
 	    }	
 		

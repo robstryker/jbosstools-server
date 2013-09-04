@@ -19,6 +19,9 @@ package org.jboss.tools.archives.scanner;
 
 /**
  * Scan a directory tree for files, with specified inclusions and exclusions.
+ * 
+ * This class was original taken from PlexUtils version 3.3.1, 
+ * and modified to add a generic type for use in a virtual tree model. 
  */
 public interface Scanner<T> {
 

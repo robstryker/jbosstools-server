@@ -143,7 +143,8 @@ import org.jboss.tools.archives.scanner.internal.MatchPattern;
  * Updates and enhancements:
  *    This class has been updated in two major ways. The first is that 
  *    it is now possible to traverse a virtual file system, or in fact
- *    any tree-structured content with names and paths. The second is that
+ *    any tree-structured content with names and paths. The class
+ *    has been updated with generics to support this usecase. The second is that
  *    it is also possible to iterate through the results, to maximize
  *    efficiency when only a subset (for example, first 100) of the results 
  *    need to be acquired. 
@@ -154,6 +155,13 @@ import org.jboss.tools.archives.scanner.internal.MatchPattern;
  *    For example, the includes pattern below would include all files inside
  *    folder a:
  *    		scanner.setIncludes("%regex[a/.*]");
+ *
+ *     Clients looking to extend this class with their own custom tree model
+ *     will need to use a generic that extends ITreeNode. While the default 
+ *     implementations for almost all methods should work, clients with uncommon
+ *     usecases may wish to override some methods in the scanner, such as
+ *         exists(T), isDirectory(ITreeNode), getName(ITreeNode), 
+ *         getChild(T, String), listChildren(ITreeNode)
  *
  * @author Arnout J. Kuiper
  *         <a href="mailto:ajkuiper@wxs.nl">ajkuiper@wxs.nl</a>
@@ -442,7 +450,7 @@ public class VirtualDirectoryScanner<T extends ITreeNode> extends AbstractScanne
      */
     protected void scandir( ITreeNode dir, String vpath, boolean fast ) {
     	 // LINE MODIFIED FOR JBOSS TOOLS;  was  dir.list();
-    	ITreeNode[] newfiles = listFiles(dir);
+    	ITreeNode[] newfiles = listChildren(dir);
         
         if ( newfiles == null )
         {
@@ -809,8 +817,8 @@ public class VirtualDirectoryScanner<T extends ITreeNode> extends AbstractScanne
      * @param file
      * @return
      */
-    protected ITreeNode[] listFiles(ITreeNode file) {
-    	return file.listChildren();
+    protected ITreeNode[] listChildren(ITreeNode node) {
+    	return node.listChildren();
     }	
     
     /**
@@ -836,9 +844,9 @@ public class VirtualDirectoryScanner<T extends ITreeNode> extends AbstractScanne
      * 
      * @param file
      * @return
-     */
-    protected String getName(ITreeNode file) {
-    	return file.getName();
+     */ 
+    protected String getName(ITreeNode node) {
+    	return node.getName();
     }
 
     /**
@@ -851,7 +859,7 @@ public class VirtualDirectoryScanner<T extends ITreeNode> extends AbstractScanne
      * 
      * @param file
      * @return
-     */
+     */ 
     protected boolean isDirectory(ITreeNode file) {
     	return !file.isLeaf();
     }
