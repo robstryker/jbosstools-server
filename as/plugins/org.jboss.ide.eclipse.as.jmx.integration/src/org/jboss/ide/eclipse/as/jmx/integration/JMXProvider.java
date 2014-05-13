@@ -47,7 +47,7 @@ import org.jboss.ide.eclipse.as.core.util.ServerUtil;
 import org.jboss.ide.eclipse.as.ui.JBossServerUISharedImages;
 import org.jboss.ide.eclipse.as.ui.UIUtil;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
-import org.jboss.tools.jmx.ui.internal.views.navigator.JMXNavigator;
+import org.jboss.tools.jmx.ui.internal.views.navigator.Navigator;
 import org.jboss.tools.jmx.ui.internal.views.navigator.MBeanExplorerContentProvider;
 import org.jboss.tools.jmx.ui.internal.views.navigator.MBeanExplorerLabelProvider;
 
@@ -112,7 +112,7 @@ public class JMXProvider {
 				super(sp, null);
 				
 				IViewRegistry reg = PlatformUI.getWorkbench().getViewRegistry();
-				IViewDescriptor desc = reg.find(JMXNavigator.VIEW_ID);
+				IViewDescriptor desc = reg.find(Navigator.VIEW_ID);
 				setText(desc.getLabel());
 				setImageDescriptor(desc.getImageDescriptor());
 				serverListener = new IServerListener() {
@@ -171,13 +171,13 @@ public class JMXProvider {
 			public void perform(final IServer server) {
 				IWorkbenchPart part = null;
 				try {
-					part = UIUtil.bringViewToFront(JMXNavigator.VIEW_ID);
+					part = UIUtil.bringViewToFront(Navigator.VIEW_ID);
 				} catch(PartInitException pie) {
 					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error loading MBean Explorer", pie));
 				}
 				
 				if( part != null ) {
-					final JMXNavigator view = (JMXNavigator) part.getAdapter(JMXNavigator.class);
+					final Navigator view = (Navigator) part.getAdapter(Navigator.class);
 					if (view != null) {
 						Display.getDefault().asyncExec(new Runnable() { 
 							public void run() {

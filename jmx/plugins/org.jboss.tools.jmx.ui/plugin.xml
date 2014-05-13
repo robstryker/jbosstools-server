@@ -13,7 +13,7 @@
       </category>
       <view
             category="org.jboss.tools"
-            class="org.jboss.tools.jmx.ui.internal.views.navigator.Navigator"
+            class="org.jboss.tools.jmx.ui.internal.views.navigator.JMXNavigator"
             icon="icons/releng_gears.gif"
             id="org.jboss.tools.jmx.ui.internal.views.navigator.MBeanExplorer"
             name="%MBeanExplorer.name"

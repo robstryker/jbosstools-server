@@ -11,13 +11,19 @@
 
 package org.jboss.tools.jmx.ui.internal.localjmx;
 
+import org.jboss.tools.jmx.jvmmonitor.core.IActiveJvm;
+
 public class JvmKey {
 	private final String hostName;
 	private final int pid;
+	
+	// The jvm is stored here, but is not part of the hashcode or .equals
+	private final IActiveJvm jvm;
 
-	public JvmKey(String hostName, int pid) {
+	public JvmKey(String hostName, int pid, IActiveJvm jvm) {
 		this.hostName = hostName;
 		this.pid = pid;
+		this.jvm = jvm;
 	}
 
 	public String getHostName() {
@@ -28,6 +34,10 @@ public class JvmKey {
 		return pid;
 	}
 
+	public IActiveJvm getJvm() {
+		return jvm;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
