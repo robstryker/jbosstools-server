@@ -18,14 +18,13 @@
 
 package org.jboss.tools.jmx.core.tree;
 
-import org.eclipse.swt.graphics.Image;
-import org.jboss.tools.jmx.commons.tree.HasName;
-import org.jboss.tools.jmx.commons.tree.Node;
-import org.jboss.tools.jmx.commons.ImageProvider;
+import java.awt.Image;
+
+import org.jboss.tools.jmx.core.HasName;
 import org.jboss.tools.jmx.core.JMXActivator;
 
 
-public class PropertyNode extends Node implements HasName, ImageProvider {
+public class PropertyNode extends Node implements HasName {
 	private String key;
 
 	private String value;
@@ -96,9 +95,5 @@ public class PropertyNode extends Node implements HasName, ImageProvider {
 
 	public String getName() {
 		return getValue();
-	}
-
-	public Image getImage() {
-		return JMXActivator.getDefault().getImage("mbean_folder.png"); //$NON-NLS-1$
 	}
 }

@@ -18,14 +18,10 @@
 
 package org.jboss.tools.jmx.core.tree;
 
-import org.eclipse.swt.graphics.Image;
-import org.jboss.tools.jmx.commons.tree.HasName;
-import org.jboss.tools.jmx.commons.tree.Node;
-import org.jboss.tools.jmx.commons.ImageProvider;
-import org.jboss.tools.jmx.core.JMXActivator;
+import org.jboss.tools.jmx.core.HasName;
 
 
-public class DomainNode extends Node implements HasName, ImageProvider {
+public class DomainNode extends Node implements HasName {
 
     private String domain;
 
@@ -82,9 +78,5 @@ public class DomainNode extends Node implements HasName, ImageProvider {
     	}
         return domain.compareTo(otherText);
     }
-
-	public Image getImage() {
-		return JMXActivator.getDefault().getImage("package.png"); //$NON-NLS-1$
-	}
 
 }

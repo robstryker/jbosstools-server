@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jboss.tools.jmx.commons.Activator;
 import org.jboss.tools.jmx.commons.util.Nodes;
+import org.jboss.tools.jmx.core.tree.Node;
 
 
 public abstract class RefreshableNode extends NodeSupport implements Refreshable {
@@ -97,6 +98,11 @@ public abstract class RefreshableNode extends NodeSupport implements Refreshable
 		// refreshUI();
 	}
 
+	public RefreshableUI getRefreshableUI() {
+		// TODO fix this
+		return null;
+	}
+	
 	/**
 	 * Is the node loading its children (so we don't want to fire change events at this point).
 	 */

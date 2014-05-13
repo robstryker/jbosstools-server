@@ -18,16 +18,14 @@
 
 package org.jboss.tools.jmx.core.tree;
 
-import org.jboss.tools.jmx.commons.tree.HasRefreshableUI;
-import org.jboss.tools.jmx.commons.tree.Node;
-import org.jboss.tools.jmx.commons.tree.Refreshable;
-import org.jboss.tools.jmx.commons.tree.RefreshableUI;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.core.JMXActivator;
 
 
 //pleacu public class Root extends Node implements Refreshable, DropHandlerFactory {
-public class Root extends Node implements Refreshable {
+public class Root extends Node {
 
 	private IConnectionWrapper connection;
 	private MBeansNode mbeansNode;
@@ -84,28 +82,6 @@ public class Root extends Node implements Refreshable {
 	}
 
 
-	@Override
-	public RefreshableUI getRefreshableUI() {
-		if (connection instanceof HasRefreshableUI) {
-			HasRefreshableUI ui = (HasRefreshableUI) connection;
-			return ui.getRefreshableUI();
-		}
-		return super.getRefreshableUI();
-	}
-
-	/* pleacu
-	public DropHandler createDropHandler(DropTargetEvent event) {
-		final List<Node> children = getChildrenList();
-		for (Node node : children) {
-			final DropHandler handler = DelegateDropListener.createDropHandler(node, event);
-			if (handler != null) {
-				return handler;
-			}
-		}
-		return null;
-	}
-		*/
-
 	public static Root getRoot(Node parent) {
 		if (parent.getParent() == null) {
 			return (Root) parent;
@@ -126,7 +102,8 @@ public class Root extends Node implements Refreshable {
 			try {
 				connection.connect();
 			} catch (Exception e) {
-				JMXActivator.getLogger().warning("Failed to connect to " + connection + ". " + e, e); //$NON-NLS-1$ //$NON-NLS-2$
+				IStatus status = new Status(IStatus.WARNING, JMXActivator.PLUGIN_ID, "Failed to connect to " + connection + ". " + e, e); 
+				JMXActivator.getDefault().getLog().log(status);
 			}
 		}
 	}

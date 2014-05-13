@@ -18,9 +18,6 @@
 
 package org.jboss.tools.jmx.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.management.MBeanServerConnection;
 
 import org.eclipse.core.runtime.IStatus;
@@ -31,9 +28,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.jboss.tools.jmx.commons.ImagesActivatorSupport;
 import org.jboss.tools.jmx.commons.logging.RiderLogFacade;
-import org.jboss.tools.jmx.commons.tree.RefreshableUI;
 import org.jboss.tools.jmx.ui.internal.adapters.JMXAdapterFactory;
-import org.jboss.tools.jmx.ui.internal.views.navigator.MBeanExplorerContentProvider;
 import org.osgi.framework.BundleContext;
 
 
@@ -47,9 +42,6 @@ public class JMXUIActivator extends ImagesActivatorSupport {
 
     // The shared instance
     private static JMXUIActivator plugin;
-
-	private static List<RootJmxNodeProvider> rootJmxNodeProviders = new ArrayList<RootJmxNodeProvider>();
-	private static List<MBeanExplorerContentProvider> contentProviders = new ArrayList<MBeanExplorerContentProvider>();
 
     private JMXAdapterFactory adapterFactory;
     private MBeanServerConnection connection;
@@ -137,31 +129,4 @@ public class JMXUIActivator extends ImagesActivatorSupport {
         	Platform.getAdapterManager().unregisterAdapters(adapterFactory, aClass);
 		}
     }
-
-	public static void provideRootNodes(RefreshableUI explorerContentProvider, List list) {
-		for (RootJmxNodeProvider provider: rootJmxNodeProviders) {
-			provider.provideRootJmxNodes(explorerContentProvider, list);
-		}
-	}
-	
-	public static void addRootJmxNodeProvider(RootJmxNodeProvider provider) {
-		rootJmxNodeProviders.add(provider);
-		
-		// lets notify the content providers to update themselves...
-		for (RefreshableUI contentProvider : contentProviders) {
-			contentProvider.fireRefresh();
-		}
-	}
-	
-	public static void removeRootJmxNodeProvider(RootJmxNodeProvider provider) {
-		rootJmxNodeProviders.remove(provider);
-	}
-
-	public static void addExplorer(MBeanExplorerContentProvider contentProvider) {
-		contentProviders.add(contentProvider);
-	}
-
-	public static void removeExplorer(RefreshableUI contentProvider) {
-		contentProviders.remove(contentProvider);
-	}
 }

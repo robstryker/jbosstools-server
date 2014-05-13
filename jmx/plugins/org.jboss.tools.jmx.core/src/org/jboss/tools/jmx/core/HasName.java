@@ -9,13 +9,8 @@
  *     Red Hat, Inc. - initial API and implementation
  ******************************************************************************/
 
-package org.jboss.tools.jmx.commons.tree;
+package org.jboss.tools.jmx.core;
 
-import java.util.Collection;
-import org.jboss.tools.jmx.core.tree.Node;
-
-public interface GraphableNodeConnected {
-
-	public Collection<Node> getGraphConnectedTo();
-
+public interface HasName {
+	public String getName();
 }

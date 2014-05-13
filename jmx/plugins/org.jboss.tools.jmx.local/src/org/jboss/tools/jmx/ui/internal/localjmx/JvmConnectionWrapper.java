@@ -74,7 +74,6 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 	protected static final Map<String,String> karafSubTypeMap = new HashMap<String, String>();
 	protected static final Map<Integer, String> processInformationStore = new HashMap<Integer, String>();
 
-	private final JvmConnectionsNode parent;
 	private IActiveJvm activeJvm;
 	private String name;
 	private Root root;
@@ -97,8 +96,7 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 		karafSubTypeMap.put("servicemix-version.jar", "Apache ServiceMix");
 	}
 
-	public JvmConnectionWrapper(JvmConnectionsNode parent, JMXServiceURL url, IActiveJvm vm) {
-		this.parent = parent;
+	public JvmConnectionWrapper(JMXServiceURL url, IActiveJvm vm) {
 		this.activeJvm = vm;
 		this.progressMonitor = null;
 	}
@@ -274,10 +272,6 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 
 	public IConnectionProvider getProvider() {
 		return ExtensionManager.getProvider(DefaultConnectionProvider.PROVIDER_ID);
-	}
-
-	public RefreshableUI getRefreshableUI() {
-		return parent.getRefreshableUI();
 	}
 
 	/**
@@ -497,5 +491,11 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 			throws JMXException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public RefreshableUI getRefreshableUI() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

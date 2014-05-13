@@ -64,9 +64,9 @@ public class QueryContribution {
 
 	private String filterText, oldFilterText;
 	private HashMap<Object, Boolean> cache = new HashMap<Object, Boolean>();
-	private Navigator navigator;
+	private JMXNavigator navigator;
 	private boolean requiresRefine;
-	public QueryContribution(final Navigator navigator) {
+	public QueryContribution(final JMXNavigator navigator) {
 		this.navigator = navigator;
 		map.put(navigator.getCommonViewer(), this);
 		addListener();

@@ -15,14 +15,12 @@ package org.jboss.tools.jmx.ui.internal.localjmx;
 import org.jboss.tools.jmx.commons.ImagesActivatorSupport;
 import org.jboss.tools.jmx.commons.logging.RiderLogFacade;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmModel;
-import org.jboss.tools.jmx.ui.JMXUIActivator;
 import org.osgi.framework.BundleContext;
 
 
 public class Activator extends ImagesActivatorSupport {
 
 	private static Activator plugin;
-	private static LocalJmxNodeProvider nodeProvider;
 
 	@Override
 	public void start(BundleContext context) throws Exception {
@@ -36,9 +34,6 @@ public class Activator extends ImagesActivatorSupport {
 		// lets start early loading of the model
 		@SuppressWarnings("unused")
 		JvmModel model = JvmModel.getInstance();
-
-		nodeProvider = new LocalJmxNodeProvider();
-		JMXUIActivator.addRootJmxNodeProvider(nodeProvider);
 	}	
 
 	/*
@@ -47,8 +42,6 @@ public class Activator extends ImagesActivatorSupport {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		JMXUIActivator.removeRootJmxNodeProvider(nodeProvider);
-
 		plugin = null;
 		super.stop(context);
 	}

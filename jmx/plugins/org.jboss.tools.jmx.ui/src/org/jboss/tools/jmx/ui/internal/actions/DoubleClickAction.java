@@ -37,7 +37,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.navigator.CommonViewer;
-import org.jboss.tools.jmx.commons.ui.actions.HasDoubleClickAction;
 import org.jboss.tools.jmx.core.ConnectJob;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.ui.internal.EditorUtils;
@@ -75,7 +74,7 @@ ISelectionChangedListener {
 		if (element instanceof IConnectionWrapper) {
 			IConnectionWrapper root = (IConnectionWrapper) element;
 			IConnectionWrapper[] connection = new IConnectionWrapper[]{root};
-			ConnectJob job = new ConnectJob(viewer, connection){
+			ConnectJob job = new ConnectJob(connection){
 
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {

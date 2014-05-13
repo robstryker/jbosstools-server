@@ -24,12 +24,11 @@ package org.jboss.tools.jmx.core;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.viewers.StructuredViewer;
 
 public class ConnectJob extends ChainedJob {
 	private IConnectionWrapper[] connection;
 
-	public ConnectJob(StructuredViewer viewer, IConnectionWrapper[] connection) {
+	public ConnectJob(IConnectionWrapper[] connection) {
 		super(JMXCoreMessages.ConnectJob, JMXActivator.PLUGIN_ID);
 		this.connection = connection;
 	}

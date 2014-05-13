@@ -47,7 +47,7 @@ public class MBeanServerConnectAction extends Action {
 
 	public void run() {
 		if( connection != null ) {
-			new ConnectJob(viewer, connection).schedule();
+			new ConnectJob(connection).schedule();
 		}
     }
 }

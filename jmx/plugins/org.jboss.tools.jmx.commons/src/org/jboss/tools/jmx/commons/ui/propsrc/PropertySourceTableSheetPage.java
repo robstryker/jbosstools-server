@@ -17,11 +17,11 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.jboss.tools.jmx.commons.tree.HasOwner;
 import org.jboss.tools.jmx.commons.tree.HasRefreshableUI;
-import org.jboss.tools.jmx.commons.tree.Node;
 import org.jboss.tools.jmx.commons.tree.Refreshable;
 import org.jboss.tools.jmx.commons.tree.Refreshables;
 import org.jboss.tools.jmx.commons.ui.Selections;
 import org.jboss.tools.jmx.commons.ui.views.ViewPropertySheetPage;
+import org.jboss.tools.jmx.core.tree.Node;
 
 
 

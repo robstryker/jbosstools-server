@@ -20,6 +20,7 @@ import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
 import org.jboss.tools.jmx.commons.ui.propsrc.PropertySourceTableSheetPage;
 import org.jboss.tools.jmx.commons.ui.views.ViewPropertySheetPage;
+import org.jboss.tools.jmx.core.tree.Node;
 
 
 

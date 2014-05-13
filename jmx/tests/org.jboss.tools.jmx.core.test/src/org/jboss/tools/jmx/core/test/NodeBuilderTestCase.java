@@ -13,9 +13,9 @@ import javax.management.ObjectName;
 
 import junit.framework.TestCase;
 
-import org.jboss.tools.jmx.commons.tree.Node;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.core.tree.DomainNode;
+import org.jboss.tools.jmx.core.tree.Node;
 import org.jboss.tools.jmx.core.tree.NodeBuilder;
 import org.jboss.tools.jmx.core.tree.ObjectNameNode;
 import org.jboss.tools.jmx.core.tree.PropertyNode;

@@ -18,14 +18,13 @@ import java.util.List;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
-import org.jboss.tools.jmx.commons.Activator;
 import org.jboss.tools.jmx.commons.Viewers;
 import org.jboss.tools.jmx.commons.tree.HasRefreshableUI;
 import org.jboss.tools.jmx.commons.tree.HasViewer;
-import org.jboss.tools.jmx.commons.tree.Node;
 import org.jboss.tools.jmx.commons.tree.Refreshable;
 import org.jboss.tools.jmx.commons.tree.RefreshableUI;
 import org.jboss.tools.jmx.commons.ui.Selections;
+import org.jboss.tools.jmx.core.tree.Node;
 
 
 public class Nodes {
@@ -183,7 +182,7 @@ public class Nodes {
 	public static Viewer getViewer(Node node) {
 		HasViewer hv = null;
 		if (node instanceof HasRefreshableUI) {
-			HasRefreshableUI hr = node;
+			HasRefreshableUI hr = (HasRefreshableUI)node;
 			RefreshableUI refreshableUI = hr.getRefreshableUI();
 			if (refreshableUI instanceof HasViewer) {
 				hv = (HasViewer) refreshableUI;

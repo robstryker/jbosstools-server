@@ -22,8 +22,6 @@ package org.jboss.tools.jmx.core;
 import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanServerConnection;
 
-import org.jboss.tools.jmx.commons.tree.HasName;
-
 
 public class MBeanAttributeInfoWrapper extends MBeanFeatureInfoWrapper implements HasName {
 

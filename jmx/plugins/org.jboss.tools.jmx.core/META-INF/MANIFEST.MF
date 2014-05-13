@@ -5,9 +5,7 @@ Bundle-SymbolicName: org.jboss.tools.jmx.core;singleton:=true
 Bundle-Version: 1.6.0.qualifier
 Bundle-Activator: org.jboss.tools.jmx.core.JMXActivator
 Bundle-Vendor: %BundleProvider
-Require-Bundle: org.jboss.tools.jmx.commons,
- org.eclipse.core.runtime,
- org.eclipse.ui.views.properties.tabbed
+Require-Bundle: org.eclipse.core.runtime
 Export-Package: org.jboss.tools.jmx.core,
  org.jboss.tools.jmx.core.providers;
  org.jboss.tools.jmx.core.util;

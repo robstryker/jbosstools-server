@@ -21,7 +21,6 @@ package org.jboss.tools.jmx.core.tree;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 
-import org.jboss.tools.jmx.commons.tree.Node;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 
 

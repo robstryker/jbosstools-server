@@ -21,7 +21,6 @@
 
 package org.jboss.tools.jmx.core.providers;
 
-import org.eclipse.jface.viewers.StructuredViewer;
 import org.jboss.tools.jmx.core.ConnectJob;
 import org.jboss.tools.jmx.core.IConnectionProviderListener;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
@@ -32,12 +31,9 @@ import org.jboss.tools.jmx.core.IConnectionWrapper;
  * automatically attempt to start
  */
 public class AutomaticStarter implements IConnectionProviderListener {
-	// TODO how to find this???
-	private StructuredViewer viewer;
-	
 	public void connectionAdded(IConnectionWrapper connection) {
 		if( connection instanceof DefaultConnectionWrapper ) {
-			new ConnectJob(viewer, new IConnectionWrapper[] { connection }).schedule();
+			new ConnectJob(new IConnectionWrapper[] { connection }).schedule();
 		}
 	}
 

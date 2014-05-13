@@ -26,17 +26,13 @@ import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import javax.management.ReflectionException;
 
-import org.eclipse.swt.graphics.Image;
-import org.jboss.tools.jmx.commons.tree.Node;
-import org.jboss.tools.jmx.commons.ImageProvider;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.core.IJMXRunnable;
-import org.jboss.tools.jmx.core.JMXActivator;
 import org.jboss.tools.jmx.core.JMXException;
 import org.jboss.tools.jmx.core.MBeanInfoWrapper;
 
 
-public class ObjectNameNode extends PropertyNode implements ImageProvider {
+public class ObjectNameNode extends PropertyNode {
 
     private ObjectName on;
     private MBeanInfoWrapper wrapper;
@@ -115,11 +111,4 @@ public class ObjectNameNode extends PropertyNode implements ImageProvider {
             return false;
         return true;
     }
-
-	@Override
-	public Image getImage() {
-		return JMXActivator.getDefault().getImage("mbean.png"); //$NON-NLS-1$
-	}
-
-
 }

@@ -12,6 +12,7 @@
 package org.jboss.tools.jmx.commons.tree;
 
 import java.util.List;
+import org.jboss.tools.jmx.core.tree.Node;
 
 /**
  * Extra helper methods to help show a graph/network view of a node and its descendents

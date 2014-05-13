@@ -28,7 +28,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.ui.PlatformUI;
-import org.jboss.tools.jmx.commons.tree.Node;
+import org.jboss.tools.jmx.core.tree.Node;
 import org.jboss.tools.jmx.commons.tree.Refreshable;
 import org.jboss.tools.jmx.commons.util.Objects;
 import org.jboss.tools.jmx.core.ExtensionManager;

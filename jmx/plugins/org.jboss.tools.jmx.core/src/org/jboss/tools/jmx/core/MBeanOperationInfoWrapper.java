@@ -22,7 +22,6 @@ package org.jboss.tools.jmx.core;
 import javax.management.MBeanOperationInfo;
 
 import org.eclipse.core.runtime.Assert;
-import org.jboss.tools.jmx.commons.tree.HasName;
 
 
 public class MBeanOperationInfoWrapper extends MBeanFeatureInfoWrapper implements HasName {

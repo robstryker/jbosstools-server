@@ -34,13 +34,13 @@ import org.eclipse.debug.core.IStreamListener;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamMonitor;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
-import org.jboss.tools.jmx.commons.tree.Node;
 import org.jboss.tools.jmx.core.ExtensionManager;
 import org.jboss.tools.jmx.core.IConnectionProvider;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.core.providers.DefaultConnectionProvider;
 import org.jboss.tools.jmx.core.test.util.TestProjectProvider;
 import org.jboss.tools.jmx.core.tree.DomainNode;
+import org.jboss.tools.jmx.core.tree.Node;
 import org.jboss.tools.jmx.core.tree.Root;
 
 public class DefaultProviderTest extends TestCase {
