@@ -15,12 +15,9 @@ import javax.management.ObjectName;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.core.IJMXRunnable;
-import org.jboss.tools.jmx.core.JMXActivator;
 import org.jboss.tools.jmx.core.JMXCoreMessages;
 import org.jboss.tools.jmx.core.JMXException;
 
@@ -50,30 +47,25 @@ public class NodeUtils {
     @SuppressWarnings("unchecked")
     public static Root createObjectNameTree(final IConnectionWrapper connectionWrapper, final IProgressMonitor monitor)
             throws JMXException {
-	try {
-
-		final Root[] _root = new Root[1];
-		connectionWrapper.run(new IJMXRunnable() {
-				public void run(MBeanServerConnection connection) throws Exception {
-			        monitor.beginTask(JMXCoreMessages.LoadMBeans, 1000);
-					Set beanInfo = connection.queryNames(new ObjectName("*:*"), null); //$NON-NLS-1$
-					monitor.worked(100);
-					SubProgressMonitor subMon = new SubProgressMonitor(monitor, 900);
-					subMon.beginTask(JMXCoreMessages.InspectMBeans, beanInfo.size() * 100);
-			        _root[0] = NodeBuilder.createRoot(connectionWrapper);
-			        Iterator iter = beanInfo.iterator();
-			        while (iter.hasNext()) {
-			            ObjectName on = (ObjectName) iter.next();
-			            NodeBuilder.addToTree(_root[0], on, connection);
-					subMon.worked(100);
-			        }
-			        subMon.done();
-			        monitor.done();
-				}
-		});
-	        return _root[0];
-	} catch(Exception e) {
-		throw new JMXException(new Status(IStatus.ERROR, JMXActivator.PLUGIN_ID, 0, e.getMessage(), e));
-	}
+    	final Root[] _root = new Root[1];
+    	connectionWrapper.run(new IJMXRunnable() {
+			public void run(MBeanServerConnection connection) throws Exception {
+		        monitor.beginTask(JMXCoreMessages.LoadMBeans, 1000);
+				Set beanInfo = connection.queryNames(new ObjectName("*:*"), null); //$NON-NLS-1$
+				monitor.worked(100);
+				SubProgressMonitor subMon = new SubProgressMonitor(monitor, 900);
+				subMon.beginTask(JMXCoreMessages.InspectMBeans, beanInfo.size() * 100);
+		        _root[0] = NodeBuilder.createRoot(connectionWrapper);
+		        Iterator iter = beanInfo.iterator();
+		        while (iter.hasNext()) {
+		            ObjectName on = (ObjectName) iter.next();
+		            NodeBuilder.addToTree(_root[0], on, connection);
+		        	subMon.worked(100);
+		        }
+		        subMon.done();
+		        monitor.done();
+			}
+    	});
+        return _root[0];
     }
 }

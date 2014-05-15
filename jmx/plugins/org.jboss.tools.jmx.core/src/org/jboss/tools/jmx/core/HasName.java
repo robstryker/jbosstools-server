@@ -11,6 +11,9 @@
 
 package org.jboss.tools.jmx.core;
 
+/**
+ * Interface for an object with a name.
+ */
 public interface HasName {
 	public String getName();
 }

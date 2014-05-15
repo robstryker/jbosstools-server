@@ -24,7 +24,6 @@ import org.jboss.tools.jmx.core.IConnectionWrapper;
 import org.jboss.tools.jmx.core.JMXActivator;
 
 
-//pleacu public class Root extends Node implements Refreshable, DropHandlerFactory {
 public class Root extends Node {
 
 	private IConnectionWrapper connection;
@@ -50,10 +49,12 @@ public class Root extends Node {
 		return connection;
 	}
 
+	// NOT API, MAY BE REMOVED
 	public boolean containsDomain(String domain) {
 		return getDomainNode(domain) != null;
 	}
 
+	// NOT API, MAY BE REMOVED
 	public DomainNode getDomainNode(String domain) {
 		Node[] nodes = mbeansNode.getChildren();
 		for (Node node : nodes) {
@@ -67,26 +68,17 @@ public class Root extends Node {
 		return null;
 	}
 
+	// NOT API, MAY BE REMOVED
 	public void refresh() {
 		IConnectionWrapper wrapper = connection;
 		if (wrapper != null) {
 			try {
 				wrapper.disconnect();
 				wrapper.connect();
-
-				// TODO fire better UI stuff here...
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		}
-	}
-
-
-	public static Root getRoot(Node parent) {
-		if (parent.getParent() == null) {
-			return (Root) parent;
-		}
-		return getRoot(parent.getParent());
 	}
 
 	public MBeansNode getMBeansNode() {

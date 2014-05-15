@@ -77,7 +77,7 @@ public class DefaultConnectionProvider extends AbstractConnectionProvider implem
 		return wrapper instanceof DefaultConnectionWrapper;
 	}
 
-	public IConnectionWrapper createConnection(Map map) throws CoreException {
+	public DefaultConnectionWrapper createConnection(Map map) throws CoreException {
 		String id = (String)map.get(ID);
 		String url = (String)map.get(URL);
 		String username = (String)map.get(USERNAME);
@@ -112,16 +112,17 @@ public class DefaultConnectionProvider extends AbstractConnectionProvider implem
 			}
 		}
 	}
-
-	public void removeConnection(IConnectionWrapper connection) {
-		if (connection != null && connection.isConnected()) {
-			try {
-				connection.disconnect();
-			} catch (Exception ioex) {
-				IStatus s = new Status(IStatus.ERROR, JMXActivator.PLUGIN_ID, JMXCoreMessages.DefaultConnection_ErrorRemoving, ioex);
-				JMXActivator.log(s);
-			}
+	
+	public DefaultConnectionWrapper getConnection(String id) {
+		IConnectionWrapper[] wraps = getConnections();
+		for( int i = 0; i < wraps.length; i++ ) {
+			if( ((DefaultConnectionWrapper)wraps[i]).getDescriptor().getID().equals(id))
+				return (DefaultConnectionWrapper)wraps[i];
 		}
+		return null;
+	}
+	
+	public void removeConnection(IConnectionWrapper connection) {
 		if( connection instanceof DefaultConnectionWrapper ) {
 			MBeanServerConnectionDescriptor descriptor =
 				((DefaultConnectionWrapper)connection).getDescriptor();

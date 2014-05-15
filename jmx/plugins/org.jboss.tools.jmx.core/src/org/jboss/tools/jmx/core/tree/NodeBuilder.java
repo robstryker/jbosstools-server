@@ -26,7 +26,10 @@ import org.jboss.tools.jmx.core.IConnectionWrapper;
 
 
 public class NodeBuilder {
-
+	public static void addToTree(Node root, ObjectName on) {
+		addToTree(root, on, null);
+	}
+	
     public static void addToList(Node root, ObjectName on) {
         Node node = buildDomainNode(root, on.getDomain());
         node = buildObjectNameNode(node, "on", on.getKeyPropertyListString(), on); //$NON-NLS-1$

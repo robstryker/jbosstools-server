@@ -62,13 +62,14 @@ public abstract class Node implements Comparable, HasRoot {
 		children.clear();
 	}
 
+	public static Root getRoot(Node n) {
+		return n.getRoot();
+	}
+	
 	public Root getRoot() {
-		Node p = parent;
-		while(p.getParent() != null) {
-			if( p instanceof Root )
-				return ((Root)p);
-			p = p.getParent();
+		if( parent == null ){
+			return this instanceof Root ? (Root)this : null;
 		}
-		return null;
+		return parent.getRoot();
 	}
 }
