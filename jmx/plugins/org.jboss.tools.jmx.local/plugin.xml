@@ -2,12 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.startup">
-      <startup
-            class="org.jboss.tools.jmx.local.internal.Startup">
-      </startup>
-   </extension>
-   <extension
          point="org.jboss.tools.jmx.core.MBeanServerConnectionProvider">
       <connectionProvider
             class="org.jboss.tools.jmx.local.JVMConnectionProvider">

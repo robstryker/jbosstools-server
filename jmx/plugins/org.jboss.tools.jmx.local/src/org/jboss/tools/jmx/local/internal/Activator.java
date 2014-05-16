@@ -12,14 +12,15 @@
 package org.jboss.tools.jmx.local.internal;
 
 
+import org.jboss.tools.foundation.core.plugin.log.IPluginLog;
+import org.jboss.tools.foundation.core.plugin.log.StatusFactory;
+import org.jboss.tools.foundation.ui.plugin.BaseUIPlugin;
 import org.jboss.tools.foundation.ui.plugin.BaseUISharedImages;
-import org.jboss.tools.jmx.commons.ImagesActivatorSupport;
-import org.jboss.tools.jmx.commons.logging.RiderLogFacade;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmModel;
 import org.osgi.framework.BundleContext;
 
 
-public class Activator extends ImagesActivatorSupport {
+public class Activator extends BaseUIPlugin {
 
 	private static Activator plugin;
 
@@ -50,31 +51,32 @@ public class Activator extends ImagesActivatorSupport {
 	public static Activator getDefault() {
 		return plugin;
 	}
-
-	// TODO remove
-	public static RiderLogFacade getLogger() {
-		return RiderLogFacade.getLog(getDefault().getLog());
-	}
-	
     
-    private BaseUISharedImages sharedImages = null;
-    
-	/**
-	 * Access the shared images for the plugin
-	 * @return
-	 */
-	public BaseUISharedImages getSharedImages() {
-		if( sharedImages == null ) {
-			sharedImages = createSharedImages();
-			
-		}
-		return sharedImages;
-	}
-	
 	/**
 	 * Create your shared images instance. Clients are expected to override this
 	 */
 	protected BaseUISharedImages createSharedImages() {
 		return new LocalVMSharedImages(getBundle());
 	}
+	
+	/**
+	 * Get the IPluginLog for this plugin. This method 
+	 * helps to make logging easier, for example:
+	 * 
+	 *     FoundationCorePlugin.pluginLog().logError(etc)
+	 *  
+	 * @return IPluginLog object
+	 */
+	public static IPluginLog pluginLog() {
+		return getDefault().pluginLogInternal();
+	}
+
+	/**
+	 * Get a status factory for this plugin
+	 * @return status factory
+	 */
+	public static StatusFactory statusFactory() {
+		return getDefault().statusFactoryInternal();
+	}
+
 }

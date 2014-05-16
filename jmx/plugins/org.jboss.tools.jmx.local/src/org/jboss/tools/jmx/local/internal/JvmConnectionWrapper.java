@@ -194,7 +194,7 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 		    }
 		    afterLoadRunnables.clear();
 		} catch (Throwable e) {
-		    Activator.getLogger().warning("Failed to load JMX tree for " + this + ". " + e, e);
+		    Activator.pluginLog().logWarning("Failed to load JMX tree for " + this + ". " + e, e);
 		}
 		progressMonitor = null;
 	    }
