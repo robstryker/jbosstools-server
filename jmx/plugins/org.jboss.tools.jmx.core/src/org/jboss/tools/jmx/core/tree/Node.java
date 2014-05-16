@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.jboss.tools.jmx.core.IConnectionWrapper;
+
 public abstract class Node implements Comparable, HasRoot {
 
 	protected Node parent;
@@ -71,5 +73,10 @@ public abstract class Node implements Comparable, HasRoot {
 			return this instanceof Root ? (Root)this : null;
 		}
 		return parent.getRoot();
+	}
+	
+	public IConnectionWrapper getConnection() {
+		Root r = getRoot(this);
+		return r.getConnection();
 	}
 }
