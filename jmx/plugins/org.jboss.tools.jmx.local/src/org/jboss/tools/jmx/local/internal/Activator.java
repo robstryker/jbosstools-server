@@ -9,9 +9,10 @@
  *     Red Hat, Inc. - initial API and implementation
  ******************************************************************************/
 
-package org.jboss.tools.jmx.ui.internal.localjmx;
+package org.jboss.tools.jmx.local.internal;
 
 
+import org.jboss.tools.foundation.ui.plugin.BaseUISharedImages;
 import org.jboss.tools.jmx.commons.ImagesActivatorSupport;
 import org.jboss.tools.jmx.commons.logging.RiderLogFacade;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmModel;
@@ -50,7 +51,30 @@ public class Activator extends ImagesActivatorSupport {
 		return plugin;
 	}
 
+	// TODO remove
 	public static RiderLogFacade getLogger() {
 		return RiderLogFacade.getLog(getDefault().getLog());
+	}
+	
+    
+    private BaseUISharedImages sharedImages = null;
+    
+	/**
+	 * Access the shared images for the plugin
+	 * @return
+	 */
+	public BaseUISharedImages getSharedImages() {
+		if( sharedImages == null ) {
+			sharedImages = createSharedImages();
+			
+		}
+		return sharedImages;
+	}
+	
+	/**
+	 * Create your shared images instance. Clients are expected to override this
+	 */
+	protected BaseUISharedImages createSharedImages() {
+		return new LocalVMSharedImages(getBundle());
 	}
 }

@@ -20,8 +20,8 @@ import org.jboss.tools.jmx.jvmmonitor.core.IJvmModelChangeListener;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmModel;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmModelEvent;
 import org.jboss.tools.jmx.jvmmonitor.core.mbean.IMBeanServer;
-import org.jboss.tools.jmx.ui.internal.localjmx.JvmConnectionWrapper;
-import org.jboss.tools.jmx.ui.internal.localjmx.JvmKey;
+import org.jboss.tools.jmx.local.internal.JvmConnectionWrapper;
+import org.jboss.tools.jmx.local.internal.JvmKey;
 
 public class JVMConnectionProvider extends AbstractConnectionProvider implements IConnectionProvider {
 	public static final String PROVIDER_ID = "org.jboss.tools.jmx.local.JVMConnectionProvider"; //$NON-NLS-1$

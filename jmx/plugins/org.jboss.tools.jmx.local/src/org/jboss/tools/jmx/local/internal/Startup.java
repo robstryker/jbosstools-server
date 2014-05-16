@@ -9,7 +9,7 @@
  *     Red Hat, Inc. - initial API and implementation
  ******************************************************************************/
 
-package org.jboss.tools.jmx.ui.internal.localjmx;
+package org.jboss.tools.jmx.local.internal;
 
 import org.eclipse.ui.IStartup;
 

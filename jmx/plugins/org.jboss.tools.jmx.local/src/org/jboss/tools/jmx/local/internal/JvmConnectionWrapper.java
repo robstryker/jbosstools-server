@@ -9,7 +9,7 @@
  *     Red Hat, Inc. - initial API and implementation
  ******************************************************************************/
 
-package org.jboss.tools.jmx.ui.internal.localjmx;
+package org.jboss.tools.jmx.local.internal;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,7 +59,6 @@ import org.jboss.tools.jmx.jvmmonitor.core.IActiveJvm;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmCoreException;
 import org.jboss.tools.jmx.jvmmonitor.internal.ui.IJvmFacade;
 import org.jboss.tools.jmx.jvmmonitor.ui.JvmMonitorPreferences;
-import org.jboss.tools.jmx.ui.JMXUIActivator;
 
 
 
@@ -143,56 +142,6 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 		return null;
 	}
 
-	/* pleacu
-	public DropHandler createDropHandler(DropTargetEvent event) {
-		if (isConnected()) {
-			if (getRoot() == null)
-				loadRoot();
-			DropHandler handler = DelegateDropListener.createDropHandler(getRoot(), event);
-			if (handler != null) {
-				return handler;
-			}
-		}
-		String lowerName = getName().toLowerCase();
-		// only support karaf and fuse esb
-		if (lowerName.contains("karaf") || lowerName.contains("fuse") || lowerName.contains("fmc") || lowerName.contains("jboss a-mq")) {
-			// lets return a lazy drop handler for later when we've actually connected
-			return new DropHandler() {
-
-				public void drop(final DropTargetEvent localEvent) {
-					addOnLoadRunnable(new Runnable() {
-						public void run() {
-							Root r = getRoot();
-							if (r == null) {
-								Activator.getLogger().warning("Cannot drop as no root yet, we've probably not been able to connect to " + getName());
-							} else {
-								DropHandler handler = DelegateDropListener.createDropHandler(r, localEvent);
-								if (handler != null) {
-									handler.drop(localEvent);
-								} else {
-									Activator.getLogger().warning("No DropHandler available. We've probably not been able to connect to " + getName());
-								}
-							}
-						}
-					});
-					if (!isConnected()) {
-						try {
-							connect();
-
-							// now lets force the lazy load
-							loadRoot();
-						} catch (Exception e) {
-							Activator.getLogger().warning("Could not connect to " + this + ". " + e, e);
-						}
-					}
-
-				}};
-		} else {
-			return null;
-		}
-	}
-	*/
-
 	protected void addOnLoadRunnable(Runnable runnable) {
 		afterLoadRunnables.add(runnable);
 	}
@@ -275,95 +224,132 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 	}
 
 	/**
-	 * Returns true if this process is a karaf container at the given root
-	 * directory
+	 * Returns true if this process is a karaf container 
 	 */
-	public boolean isKaraf(String rootDir) {
-		String displayName = activeJvm.getMainClass();
+	private static boolean isKaraf(IActiveJvm jvm) {
+		String displayName = jvm.getMainClass();
 		return Objects.equal("org.apache.karaf.main.Main", displayName);
 	}
 
+	
+	private abstract static class JvmConnectionWrapperLabelProvider {
+		public abstract boolean accepts(IActiveJvm jvm);
+		public abstract Image getImage(IActiveJvm jvm);
+		public abstract String getDisplayString(IActiveJvm jvm);
+	}
+	
+	private JvmConnectionWrapperLabelProvider[] jvmConnectionLabelProviders = new JvmConnectionWrapperLabelProvider[]{
+			new JavaProcessLabelProvider(),
+			new CamelContextLabelProvider(),
+			new MavenLabelProvider(),
+			new KarafLabelProvider()
+	};
+	
+	private static class JavaProcessLabelProvider extends JvmConnectionWrapperLabelProvider {
+		public boolean accepts(IActiveJvm jvm) {
+			return Strings.isBlank(jvm.getMainClass());
+		}
+		public Image getImage(IActiveJvm jvm) {
+			return Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CONTAINER_GIF);
+		}
+		public String getDisplayString(IActiveJvm jvm) {
+			return "Java process";
+		}
+	}
+
+	private static class CamelContextLabelProvider extends JvmConnectionWrapperLabelProvider {
+		public boolean accepts(IActiveJvm jvm) {
+			return jvm.getMainClass().endsWith("org.apache.camel:camel-maven-plugin:run");
+		}
+		public Image getImage(IActiveJvm jvm) {
+			return Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CAMEL_PNG);
+		}
+		public String getDisplayString(IActiveJvm jvm) {
+			return "Local Camel Context";
+		}
+	}
+
+	private static class MavenLabelProvider extends JvmConnectionWrapperLabelProvider {
+		public boolean accepts(IActiveJvm jvm) {
+			return jvm.getMainClass().startsWith(MAVEN_PREFIX);
+		}
+		public Image getImage(IActiveJvm jvm) {
+			return Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CONTAINER_GIF);
+		}
+		public String getDisplayString(IActiveJvm jvm) {
+			String displayName = "maven" + jvm.getMainClass().substring(MAVEN_PREFIX.length());
+			if (!jvm.isRemote()) {
+				String pInfo = queryProcessInformation(jvm.getPid());
+				if (pInfo != null) {
+					int start = pInfo.indexOf(ECLIPSE_MAVEN_PROCESS_PREFIX);
+					if (start != -1) {
+						int end   = pInfo.indexOf(ECLIPSE_MAVEN_PROCESS_POSTFIX, start+ECLIPSE_MAVEN_PROCESS_PREFIX.length()+1);
+						if (end != -1) {
+							displayName = pInfo.substring(start + ECLIPSE_MAVEN_PROCESS_PREFIX.length(), end);
+						} else {
+							displayName = pInfo.substring(start + ECLIPSE_MAVEN_PROCESS_PREFIX.length());
+						}
+					}
+				}
+			}
+			return displayName;
+		}
+	}
+	
+	private static class KarafLabelProvider extends JvmConnectionWrapperLabelProvider {
+		public boolean accepts(IActiveJvm jvm) {
+			return isKaraf(jvm);
+		}
+		public Image getImage(IActiveJvm jvm) {
+			String karafHomeFolder = getKarafHomeFolder(jvm);
+			String karafSubType = getKarafSubtype(karafHomeFolder);
+			Image i = null;
+			if (karafSubType != null) {
+				if (karafSubType.toLowerCase().contains("esb")) {
+					i = Activator.getDefault().getSharedImages().image(LocalVMSharedImages.FUSE_PNG);
+				} else if (karafSubType.toLowerCase().contains("fabric")) {
+					i = Activator.getDefault().getSharedImages().image(LocalVMSharedImages.FABRIC_PNG);
+				} else if (karafSubType.toLowerCase().contains("mq")) {
+					i = Activator.getDefault().getSharedImages().image(LocalVMSharedImages.MQ_PNG);
+				} else if (karafSubType.toLowerCase().contains("servicemix")) {
+					i = Activator.getDefault().getSharedImages().image(LocalVMSharedImages.SMX_PNG);
+				} else {
+					i = Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CONTAINER_PNG);
+				}
+			}
+			return i;
+		}
+		public String getDisplayString(IActiveJvm jvm) {
+			String karafHomeFolder = getKarafHomeFolder(jvm);
+			String karafSubType = getKarafSubtype(karafHomeFolder);
+			String displayName = jvm.getMainClass();
+			if (karafSubType == null) {
+				displayName = getNameFromAliasMap(displayName);
+			} else {
+				displayName = karafSubType;
+			}
+			return displayName;
+		}
+	}
+	
+	
+	
+	private JvmConnectionWrapperLabelProvider findProvider(IActiveJvm jvm) {
+		for( int i = 0; i < jvmConnectionLabelProviders.length; i++ ) {
+			if( jvmConnectionLabelProviders[i].accepts(jvm))
+				return jvmConnectionLabelProviders[i];
+		}
+		return null;
+	}
+	
 	public String getName() {
 		if (name == null) {
-			String displayName = activeJvm.getMainClass();
-			if (Strings.isBlank(displayName)) {
-				displayName = "Java process";
-			} else if (displayName.startsWith(MAVEN_PREFIX)) {
-				displayName = "maven" + displayName.substring(MAVEN_PREFIX.length());
-				if (displayName.endsWith("org.apache.camel:camel-maven-plugin:run") || displayName.endsWith("camel:run")) {
-					displayName = "Local Camel Context";
-					image = JMXUIActivator.getDefault().getImage("camel.png");
-				} else {
-					if (!activeJvm.isRemote()) {
-						String pInfo = queryProcessInformation(activeJvm.getPid());
-						if (pInfo != null) {
-							int start = pInfo.indexOf(ECLIPSE_MAVEN_PROCESS_PREFIX);
-							if (start != -1) {
-								int end   = pInfo.indexOf(ECLIPSE_MAVEN_PROCESS_POSTFIX, start+ECLIPSE_MAVEN_PROCESS_PREFIX.length()+1);
-								if (end != -1) {
-									displayName = pInfo.substring(start + ECLIPSE_MAVEN_PROCESS_PREFIX.length(), end);
-								} else {
-									displayName = pInfo.substring(start + ECLIPSE_MAVEN_PROCESS_PREFIX.length());
-								}
-							}
-						}
-					}
-				}
-			} else if (isKaraf(displayName)) {
-				// we need to distinguish between pure karaf, apache smx, fuse esb and fuse fabric, etc
-				String karafHomeFolder = null;
-				if (!activeJvm.isRemote()) {
-					String pInfo = queryProcessInformation(activeJvm.getPid());
-					if (pInfo != null) {
-						int start = pInfo.indexOf(KARAF_HOME_PREFIX);
-						if (start != -1) {
-							int end   = pInfo.indexOf(KARAF_HOME_POSTFIX, start+KARAF_HOME_PREFIX.length()+1);
-							if (end != -1) {
-								karafHomeFolder = pInfo.substring(start + KARAF_HOME_PREFIX.length(), end);
-							}
-						}
-					}
-				}
-
-				String karafSubType = null;
-				if (karafHomeFolder != null) {
-					File libFolder = new File(String.format("%s%slib%s", karafHomeFolder, File.separator, File.separator));
-					if (libFolder.exists() && libFolder.isDirectory()) {
-						File[] jars = libFolder.listFiles(new FileFilter() {
-							public boolean accept(File f) {
-								return f.isFile() && (f.getName().toLowerCase().endsWith("-version.jar"));
-							}
-						});
-						if (jars != null && jars.length==1) {
-							File f = jars[0];
-							if (karafSubTypeMap.containsKey(f.getName())) {
-								karafSubType = karafSubTypeMap.get(f.getName());
-							} else {
-								karafSubType = karafSubTypeMap.get("default");
-							}
-						}
-					}
-				}
-				if (karafSubType != null) {
-					if (karafSubType.toLowerCase().contains("esb")) {
-						image = JMXUIActivator.getDefault().getImage("fuse_server.png");
-					} else if (karafSubType.toLowerCase().contains("fabric")) {
-						image = JMXUIActivator.getDefault().getImage("fabric.png");
-					} else if (karafSubType.toLowerCase().contains("mq")) {
-						image = JMXUIActivator.getDefault().getImage("mq_server.png");
-					} else if (karafSubType.toLowerCase().contains("servicemix")) {
-						image = JMXUIActivator.getDefault().getImage("smx_server.png");
-					} else {
-						image = JMXUIActivator.getDefault().getImage("container.png");
-					}
-				}
-
-				if (karafSubType == null) {
-					displayName = getNameFromAliasMap(displayName);
-				} else {
-					displayName = karafSubType;
-				}
+			JvmConnectionWrapperLabelProvider provider  = findProvider(activeJvm);
+			String displayName;
+			if( provider != null ) {
+				displayName = provider.getDisplayString(activeJvm);
 			} else {
+				displayName = activeJvm.getMainClass();
 				displayName = getNameFromAliasMap(displayName);
 			}
 			// include pid in name
@@ -372,8 +358,47 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 		}
 		return name;
 	}
+	
+	private static String getKarafHomeFolder(IActiveJvm jvm) {
+		String karafHomeFolder = null;
+		if (!jvm.isRemote()) {
+			String pInfo = queryProcessInformation(jvm.getPid());
+			if (pInfo != null) {
+				int start = pInfo.indexOf(KARAF_HOME_PREFIX);
+				if (start != -1) {
+					int end   = pInfo.indexOf(KARAF_HOME_POSTFIX, start+KARAF_HOME_PREFIX.length()+1);
+					if (end != -1) {
+						karafHomeFolder = pInfo.substring(start + KARAF_HOME_PREFIX.length(), end);
+					}
+				}
+			}
+		}
+		return karafHomeFolder;
+	}
+	private static String getKarafSubtype(String karafHomeFolder) {
+		String karafSubType = null;
+		if (karafHomeFolder != null) {
+			File libFolder = new File(String.format("%s%slib%s", karafHomeFolder, File.separator, File.separator));
+			if (libFolder.exists() && libFolder.isDirectory()) {
+				File[] jars = libFolder.listFiles(new FileFilter() {
+					public boolean accept(File f) {
+						return f.isFile() && (f.getName().toLowerCase().endsWith("-version.jar"));
+					}
+				});
+				if (jars != null && jars.length==1) {
+					File f = jars[0];
+					if (karafSubTypeMap.containsKey(f.getName())) {
+						karafSubType = karafSubTypeMap.get(f.getName());
+					} else {
+						karafSubType = karafSubTypeMap.get("default");
+					}
+				}
+			}
+		}
+		return karafSubType;
+	}
 
-	private String getNameFromAliasMap(String displayName) {
+	private static String getNameFromAliasMap(String displayName) {
 		Set<Entry<String, String>> entrySet = vmAliasMap.entrySet();
 		for (Entry<String, String> entry : entrySet) {
 			String key = entry.getKey();
@@ -390,16 +415,18 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 
 
 	public Image getImage() {
-		String n = getName();
 		if (image == null) {
-			if (n != null && n.contains("Camel")) {
-				image = JMXUIActivator.getDefault().getImage("camel.png");
+			Image ret = null;
+			JvmConnectionWrapperLabelProvider provider  = findProvider(activeJvm);
+			if( provider != null ) {
+				ret = provider.getImage(activeJvm);
 			}
+			if( ret == null ) {
+				ret = Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CONTAINER_GIF);
+			}
+			image = ret;
 		}
-		if (image != null) {
-			return image;
-		}
-		return JMXUIActivator.getDefault().getImage("container.gif");
+		return image;
 	}
 
 	public Properties getAgentProperties() {
@@ -422,7 +449,7 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 	 * @param pid
 	 * @return
 	 */
-	private String queryProcessInformation(int pid) {
+	private static String queryProcessInformation(int pid) {
 		String retVal = null;
 
 		if (!processInformationStore.containsKey(pid)) {
