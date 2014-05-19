@@ -9,8 +9,12 @@
  *     Red Hat, Inc. - initial API and implementation
  ******************************************************************************/
 
-package org.jboss.tools.jmx.commons.tree;
+package org.jboss.tools.jmx.ui.internal.views.navigator;
 
-public interface HasName {
-	public String getName();
+import org.eclipse.jface.action.IMenuManager;
+
+public interface ContextMenuProvider {
+
+	void provideContextMenu(IMenuManager menu);
+
 }

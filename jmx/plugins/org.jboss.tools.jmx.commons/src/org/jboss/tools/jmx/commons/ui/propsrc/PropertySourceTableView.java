@@ -142,77 +142,47 @@ public class PropertySourceTableView extends TableViewSupport implements IProper
 			list.add(exemplar);
 		}
 
-		boolean usePropertySourceProviderIfItHasNicerRenderers = false;
-		if (usePropertySourceProviderIfItHasNicerRenderers) {
-			SortedMap<String, TableViewerColumn> headers = new TreeMap<String, TableViewerColumn>();
-			for (Object object : list) {
-				final IPropertySource propertySource = PropertySources.asPropertySource(object);
-				IPropertyDescriptor[] descriptors = propertySource.getPropertyDescriptors();
-				if (descriptors != null) {
-					for (final IPropertyDescriptor descriptor : descriptors) {
-						final Object id = descriptor.getId();
-						String header = PropertyDescriptors.getReadablePropertyName(descriptor);
-						TableViewerColumn col = headers.get(header);
-						if (col == null) {
-							col = createTableViewerColumn(header, bounds, column++);
-							headers.put(header, col);
-
-							IPropertySourceProvider propertySourceProvider = new IPropertySourceProvider() {
-								@Override
-								public IPropertySource getPropertySource(Object object) {
-									return PropertySources.asPropertySource(object);
-								}
-
-							};
-							col.setLabelProvider(new PropertyColumnLabelProvider(propertySourceProvider, id));
+		SortedMap<String, Function1> headers = new TreeMap<String, Function1>();
+		for (Object object : list) {
+			final IPropertySource propertySource = PropertySources.asPropertySource(object);
+			IPropertyDescriptor[] descriptors = propertySource.getPropertyDescriptors();
+			if (descriptors != null) {
+				for (final IPropertyDescriptor descriptor : descriptors) {
+					final Object id = descriptor.getId();
+					String name = PropertyDescriptors.getReadablePropertyName(descriptor);
+					Function1 function = new Function1WithReturnType() {
+						@Override
+						public Object apply(Object object) {
+							IPropertySource property = PropertySources.asPropertySource(object);
+							if (property != null) {
+								return property.getPropertyValue(id);
+							}
+							return null;
 						}
-					}
+
+						@Override
+						public Class<?> getReturnType() {
+							return PropertyDescriptors.getPropertyType(descriptor);
+						}
+					};
+					headers.put(name, function);
 				}
 			}
 		}
-		else {
-			SortedMap<String, Function1> headers = new TreeMap<String, Function1>();
-			for (Object object : list) {
-				final IPropertySource propertySource = PropertySources.asPropertySource(object);
-				IPropertyDescriptor[] descriptors = propertySource.getPropertyDescriptors();
-				if (descriptors != null) {
-					for (final IPropertyDescriptor descriptor : descriptors) {
-						final Object id = descriptor.getId();
-						String name = PropertyDescriptors.getReadablePropertyName(descriptor);
-						Function1 function = new Function1WithReturnType() {
-							@Override
-							public Object apply(Object object) {
-								IPropertySource property = PropertySources.asPropertySource(object);
-								if (property != null) {
-									return property.getPropertyValue(id);
-								}
-								return null;
-							}
-
-							@Override
-							public Class<?> getReturnType() {
-								return PropertyDescriptors.getPropertyType(descriptor);
-							}
-						};
-						headers.put(name, function);
-					}
-				}
+		int idx = 0;
+		boolean pickedSortColumn = false;
+		Set<Entry<String, Function1>> entrySet = headers.entrySet();
+		for (Entry<String, Function1> entry : entrySet) {
+			String header = entry.getKey();
+			if (!pickedSortColumn && isDefaultSortColumn(header)) {
+				setDefaultSortColumnIndex(idx);
+				pickedSortColumn = true;
 			}
-			int idx = 0;
-			boolean pickedSortColumn = false;
-			Set<Entry<String, Function1>> entrySet = headers.entrySet();
-			for (Entry<String, Function1> entry : entrySet) {
-				String header = entry.getKey();
-				if (!pickedSortColumn && isDefaultSortColumn(header)) {
-					setDefaultSortColumnIndex(idx);
-					pickedSortColumn = true;
-				}
-				Function1 function = entry.getValue();
-				addFunction(function);
-				TableViewerColumn col = createTableViewerColumn(header, bounds, column++);
-				col.setLabelProvider(createColumnLabelProvider(header, function));
-				idx++;
-			}
+			Function1 function = entry.getValue();
+			addFunction(function);
+			TableViewerColumn col = createTableViewerColumn(header, bounds, column++);
+			col.setLabelProvider(createColumnLabelProvider(header, function));
+			idx++;
 		}
 	}
 
