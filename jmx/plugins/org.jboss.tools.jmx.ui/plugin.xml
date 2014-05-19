@@ -322,15 +322,15 @@
                id="PropertiesSection"
                tab="org.jboss.tools.jmx.ui.views.PropertiesTab">
          </propertySection>
-
+<!--
          <propertySection
                class="org.jboss.tools.jmx.ui.internal.propertysheet.ContentsTabSection"
                filter="org.jboss.tools.jmx.ui.internal.propertysheet.ContentsSectionFilter"
                id="ContentsSection"
                tab="org.jboss.tools.jmx.ui.views.ContentsTab">
-         </propertySection>
+         </propertySection>-->
       </propertySections>
-   </extension>
+   </extension> 
 
    <!-- Decorator for connected / disconnected -->
    <extension point="org.eclipse.ui.decorators">

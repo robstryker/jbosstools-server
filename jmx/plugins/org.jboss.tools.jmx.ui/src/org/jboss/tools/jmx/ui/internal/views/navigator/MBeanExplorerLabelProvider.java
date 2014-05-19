@@ -28,6 +28,7 @@ import org.jboss.tools.jmx.core.MBeanOperationInfoWrapper;
 import org.jboss.tools.jmx.core.MBeanUtils;
 import org.jboss.tools.jmx.core.tree.DomainNode;
 import org.jboss.tools.jmx.core.tree.ErrorRoot;
+import org.jboss.tools.jmx.core.tree.MBeansNode;
 import org.jboss.tools.jmx.core.tree.ObjectNameNode;
 import org.jboss.tools.jmx.core.tree.PropertyNode;
 import org.jboss.tools.jmx.ui.ImageProvider;
@@ -139,6 +140,9 @@ public class MBeanExplorerLabelProvider extends LabelProvider {
 
 		if( obj instanceof ErrorRoot ) {
 		    return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
+		}
+		if( obj instanceof MBeansNode) {
+			return JMXImages.get(JMXImages.IMG_MBEANS);
 		}
 		if (obj instanceof DomainNode) {
 			return JMXImages.get(JMXImages.IMG_OBJS_LIBRARY);

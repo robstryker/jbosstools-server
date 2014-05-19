@@ -39,11 +39,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.jboss.tools.jmx.commons.ImageProvider;
-import org.jboss.tools.jmx.commons.tree.HasRefreshableUI;
-import org.jboss.tools.jmx.commons.tree.RefreshableUI;
-import org.jboss.tools.jmx.commons.util.Objects;
-import org.jboss.tools.jmx.commons.util.Strings;
 import org.jboss.tools.jmx.core.ExtensionManager;
 import org.jboss.tools.jmx.core.HasName;
 import org.jboss.tools.jmx.core.IConnectionProvider;
@@ -59,10 +54,11 @@ import org.jboss.tools.jmx.jvmmonitor.core.IActiveJvm;
 import org.jboss.tools.jmx.jvmmonitor.core.JvmCoreException;
 import org.jboss.tools.jmx.jvmmonitor.internal.ui.IJvmFacade;
 import org.jboss.tools.jmx.jvmmonitor.ui.JvmMonitorPreferences;
+import org.jboss.tools.jmx.ui.ImageProvider;
 
 
 
-public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageProvider, HasRefreshableUI, IAdaptable, IJvmFacade {
+public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageProvider, IAdaptable, IJvmFacade {
 	private static final String MAVEN_PREFIX = "org.codehaus.plexus.classworlds.launcher.Launcher";
 	private static final String ECLIPSE_MAVEN_PROCESS_PREFIX  = "-DECLIPSE_PROCESS_NAME='";
 	private static final String ECLIPSE_MAVEN_PROCESS_POSTFIX = "'";
@@ -228,9 +224,19 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 	 */
 	private static boolean isKaraf(IActiveJvm jvm) {
 		String displayName = jvm.getMainClass();
-		return Objects.equal("org.apache.karaf.main.Main", displayName);
+		return equal("org.apache.karaf.main.Main", displayName);
+	}
+	
+	private static boolean equal(Object a, Object b) {
+		if (a == b) {
+			return true;
+		}
+		return a != null && b != null && a.equals(b);
 	}
 
+	private static boolean isBlank(String text) {
+		return text == null || text.trim().length() == 0;
+	}
 	
 	private abstract static class JvmConnectionWrapperLabelProvider {
 		public abstract boolean accepts(IActiveJvm jvm);
@@ -247,7 +253,7 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 	
 	private static class JavaProcessLabelProvider extends JvmConnectionWrapperLabelProvider {
 		public boolean accepts(IActiveJvm jvm) {
-			return Strings.isBlank(jvm.getMainClass());
+			return isBlank(jvm.getMainClass());
 		}
 		public Image getImage(IActiveJvm jvm) {
 			return Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CONTAINER_GIF);
@@ -518,11 +524,5 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 			throws JMXException {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public RefreshableUI getRefreshableUI() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

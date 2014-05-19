@@ -112,13 +112,13 @@ public class JMXUIActivator extends AbstractUIPlugin {
     private void registerAdapters() {
         adapterFactory = new JMXAdapterFactory();
         for (Class<?> aClass : adapterFactory.getAdapterClasses()) {
-		Platform.getAdapterManager().registerAdapters(adapterFactory, aClass);
+        	Platform.getAdapterManager().registerAdapters(adapterFactory, aClass);
 		}
     }
 
     private void unregisterAdapters() {
-        for (Class<?> aClass : adapterFactory.getAdapterClasses()) {
-		Platform.getAdapterManager().unregisterAdapters(adapterFactory, aClass);
-		}
+    	for (Class<?> aClass : adapterFactory.getAdapterClasses()) {
+    		Platform.getAdapterManager().unregisterAdapters(adapterFactory, aClass);
+    	}
     }
 }
