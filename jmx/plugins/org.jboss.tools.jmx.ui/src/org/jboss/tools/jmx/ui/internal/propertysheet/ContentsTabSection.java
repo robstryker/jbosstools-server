@@ -30,20 +30,20 @@ public class ContentsTabSection extends PropertySourceTableView {
 
     @Override
     public void setInput(IWorkbenchPart part, ISelection selection) {
-        RefreshableCollectionNode node = (RefreshableCollectionNode) Selections.getFirstSelection(selection);
-        if (node == current) {
-            return;
-        }
-        if (current == null || current.getClass() != node.getClass()) {
-            // reset the configuration
-            setConfiguration(null);
-        }
-        current = node;
-        List<?> propertySources = node == null ? Collections.emptyList() : node.getPropertySourceList();
-        setPropertySources(propertySources);
-        getViewer().setInput(propertySources);
-        recreateColumns();
-        getViewer().refresh(true);
+    	Object o = Selections.getFirstSelection(selection);
+    	if( o instanceof RefreshableCollectionNode) {
+        	RefreshableCollectionNode node = (RefreshableCollectionNode)o;
+            if (current == null || current.getClass() != node.getClass()) {
+                // reset the configuration
+                setConfiguration(null);
+            }
+            current = node;
+            List<?> propertySources = node == null ? Collections.emptyList() : node.getPropertySourceList();
+            setPropertySources(propertySources);
+            getViewer().setInput(propertySources);
+            recreateColumns();
+            getViewer().refresh(true);
+    	}
     }
 
     @Override

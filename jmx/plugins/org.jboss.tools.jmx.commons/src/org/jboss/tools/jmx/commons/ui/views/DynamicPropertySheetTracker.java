@@ -88,10 +88,6 @@ public class DynamicPropertySheetTracker {
 				page.dispose();
 			}
 
-			if (selectionPage instanceof TabFolderSupport2) {
-				TabFolderSupport2 tfs = (TabFolderSupport2) selectionPage;
-				tfs.init(propertySheet);
-			} else {
 				boolean initSelectionPage = false;
 				if (selectionPage instanceof Page) {
 					Page p = (Page) selectionPage;
@@ -101,7 +97,6 @@ public class DynamicPropertySheetTracker {
 						p.init(new PageSite(viewSite));
 					}
 				}
-			}
 			if (selection != null) {
 				selectionPage.selectionChanged(part, selection);
 			}

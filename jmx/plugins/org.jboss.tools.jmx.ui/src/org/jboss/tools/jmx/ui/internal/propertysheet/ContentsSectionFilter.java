@@ -35,8 +35,6 @@ public class ContentsSectionFilter implements IFilter {
 	}
 
     public boolean select(Object toTest) {
-    	if (noContentsTab.contains(toTest.getClass().getName())) 
-    		return false;
-    	return false;
+    	return true;
     }
 }

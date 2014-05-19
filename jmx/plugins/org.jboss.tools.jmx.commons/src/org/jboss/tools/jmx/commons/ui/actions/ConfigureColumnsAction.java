@@ -23,12 +23,10 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.tabbed.ISection;
-import org.eclipse.ui.views.properties.tabbed.TabContents;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.jboss.tools.jmx.commons.Activator;
 import org.jboss.tools.jmx.commons.ui.IConfigurableColumns;
 import org.jboss.tools.jmx.commons.ui.propsrc.PropertySourceTableSheetPage;
-import org.jboss.tools.jmx.commons.ui.views.TabFolderSupport2;
 import org.jboss.tools.jmx.commons.ui.views.TableViewSupport;
 
 
@@ -87,10 +85,7 @@ public class ConfigureColumnsAction extends Action {
 				this.columns = (IConfigurableColumns)sp.getTableView();
 			} else {
 			    ISection[] secs = null;
-			    if (ps.getCurrentPage() instanceof TabFolderSupport2) {
-				TabFolderSupport2 tfs = (TabFolderSupport2)ps.getCurrentPage();
-				secs = ((TabContents)tfs.getCurrentTab()).getSections();
-			    } else if (ps.getCurrentPage() instanceof TabbedPropertySheetPage) {
+			    if (ps.getCurrentPage() instanceof TabbedPropertySheetPage) {
 			        TabbedPropertySheetPage tabbedPage = (TabbedPropertySheetPage) ps.getCurrentPage();
 			        secs = tabbedPage.getCurrentTab() == null ? null : tabbedPage.getCurrentTab().getSections();
 			    }

@@ -169,21 +169,7 @@ public abstract class ColumnViewSupport extends ViewPart implements IConfigurabl
 		if (site != null) {
 			site.setSelectionProvider(getViewer());
 		}
-		if (tabbedPropertySheetPage instanceof TabFolderSupport2) {
-			TabFolderSupport2 tfs = (TabFolderSupport2) tabbedPropertySheetPage;
-			IViewSite viewSite = tfs.getViewSite();
-			if (viewSite != null) {
-				viewSite.setSelectionProvider(getViewer());
-				/*
-				PropertySheet propertySheet = tfs.getPropertySheet();
-				IWorkbenchPage page = viewSite.getPage();
-				IWorkbenchPart activePart = page.getActivePart();
-				if (propertySheet != null) {
-					propertySheet.getSite().getPage().addPostSelectionListener(propertySheet);
-				}
-				 */
-			}
-		}
+
 		if (pageSite != null) {
 			// NOTE the following code can cause ECLIPSE-692
 			// so lets not do it for now :)
