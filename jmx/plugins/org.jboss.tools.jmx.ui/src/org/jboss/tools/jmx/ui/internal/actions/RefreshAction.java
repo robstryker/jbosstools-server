@@ -40,6 +40,9 @@ import org.jboss.tools.jmx.ui.internal.JMXImages;
 
 
 /**
+ * Refresh a given node. If the node is an IConnectionWrapper, disconnect and reconnect.
+ * Otherwise, adapt the node to a Refreshable and invoke its refresh() method. 
+ * 
  * @author lhein
  */
 public class RefreshAction extends Action implements IWorkbenchWindowActionDelegate {
@@ -88,11 +91,8 @@ public class RefreshAction extends Action implements IWorkbenchWindowActionDeleg
 
 			else if (onode instanceof Node) {
 				Node node = (Node) onode;
-				while ((node != null) && (!(node instanceof Root)))
-					node = node.getParent();
-
-				if (node != null)
-					wrapper = ((Root)node).getConnection();
+				Root r = (node == null ? null : node.getRoot());
+				wrapper = (r == null ? null : r.getConnection());
 			}
 
 			if (wrapper != null) {

@@ -306,11 +306,6 @@
                category="org.jboss.tools.jmx.ui.views"
                id="org.jboss.tools.jmx.ui.views.PropertiesTab"
                label="Properties"/>
-         <propertyTab
-               afterTab="org.jboss.tools.jmx.ui.views.PropertiesTab"
-               category="org.jboss.tools.jmx.ui.views"
-               id="org.jboss.tools.jmx.ui.views.ContentsTab"
-               label="Contents"/>
       </propertyTabs>
    </extension>
    <extension
@@ -322,13 +317,6 @@
                id="PropertiesSection"
                tab="org.jboss.tools.jmx.ui.views.PropertiesTab">
          </propertySection>
-<!--
-         <propertySection
-               class="org.jboss.tools.jmx.ui.internal.propertysheet.ContentsTabSection"
-               filter="org.jboss.tools.jmx.ui.internal.propertysheet.ContentsSectionFilter"
-               id="ContentsSection"
-               tab="org.jboss.tools.jmx.ui.views.ContentsTab">
-         </propertySection>-->
       </propertySections>
    </extension> 
 

@@ -13,6 +13,12 @@ package org.jboss.tools.jmx.ui;
 
 import org.eclipse.swt.graphics.Image;
 
+/**
+ * An interface for any tree node that wishes to provide an image.
+ * This may be useful for an IConnectionWrapper that wishes to have 
+ * a variable image depending on what it discovers about its connection,
+ * rather than one static image for the connection type. 
+ */
 public interface ImageProvider {
 
 	Image getImage();
