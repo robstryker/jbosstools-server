@@ -84,11 +84,6 @@ public class ActionProvider extends CommonActionProvider {
 		menu.appendToGroup("additions", refreshAction); //$NON-NLS-1$
 
 		Object firstSelection = getFirstSelection();
-		if (firstSelection instanceof ContextMenuProvider) {
-			ContextMenuProvider provider = (ContextMenuProvider) firstSelection;
-			provider.provideContextMenu(menu);
-		}
-
 		IConnectionWrapper[] connections = getWrappersFromSelection();
 		if (connections != null && connections.length > 0) {
 			if (!anyConnected(connections) && allControlable(connections))

@@ -90,8 +90,7 @@ public class RefreshAction extends Action implements IWorkbenchWindowActionDeleg
 				wrapper = (IConnectionWrapper) onode;
 
 			else if (onode instanceof Node) {
-				Node node = (Node) onode;
-				Root r = (node == null ? null : node.getRoot());
+				Root r = ((Node) onode).getRoot();
 				wrapper = (r == null ? null : r.getConnection());
 			}
 

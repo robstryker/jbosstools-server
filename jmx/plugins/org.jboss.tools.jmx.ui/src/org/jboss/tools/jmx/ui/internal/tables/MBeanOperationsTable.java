@@ -30,10 +30,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.jboss.tools.jmx.core.MBeanInfoWrapper;
 import org.jboss.tools.jmx.core.MBeanOperationInfoWrapper;
-import org.jboss.tools.jmx.core.util.StringUtils;
 import org.jboss.tools.jmx.ui.Messages;
 import org.jboss.tools.jmx.ui.internal.JMXImages;
-
+import org.jboss.tools.jmx.ui.internal.StringUtils;
 
 public class MBeanOperationsTable {
 
