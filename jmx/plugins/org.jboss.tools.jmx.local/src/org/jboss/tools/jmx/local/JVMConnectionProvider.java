@@ -93,7 +93,6 @@ public class JVMConnectionProvider extends AbstractConnectionProvider implements
 		JvmConnectionWrapper[] added = findAdded(fromModel);
 		JvmConnectionWrapper[] removed = findRemoved(fromModel);
 		JvmConnectionWrapper[] changed = findAndUpdateChanged(fromModel);
-
 		if( added.length > 0 || removed.length > 0 || changed.length > 0 ) {
 			// Change occurred somewhere
 			fireAllAdded(added);

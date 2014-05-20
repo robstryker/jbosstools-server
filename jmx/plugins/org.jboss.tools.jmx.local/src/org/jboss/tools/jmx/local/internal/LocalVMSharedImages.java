@@ -25,11 +25,18 @@ public class LocalVMSharedImages extends BaseUISharedImages {
 	
 	public LocalVMSharedImages(Bundle pluginBundle) {
 		super(pluginBundle);
+		addImage(CONTAINER_GIF, CONTAINER_GIF);
+		addImage(CONTAINER_PNG, CONTAINER_PNG);
+		addImage(CAMEL_PNG, CAMEL_PNG);
+		addImage(FABRIC_PNG, FABRIC_PNG);
+		addImage(FUSE_PNG, FUSE_PNG);
+		addImage(MQ_PNG, MQ_PNG);
+		addImage(SMX_PNG, SMX_PNG);
+		
 	}
 	
 	private LocalVMSharedImages() {
-		super(JMXUIActivator.getDefault().getBundle());
-		addImage(CONTAINER_GIF, CONTAINER_GIF);
+		this(JMXUIActivator.getDefault().getBundle());
 	}
 
 	public static Image getImage(String k) {

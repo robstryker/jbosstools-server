@@ -245,21 +245,24 @@ public class JvmConnectionWrapper implements IConnectionWrapper, HasName, ImageP
 	}
 	
 	private JvmConnectionWrapperLabelProvider[] jvmConnectionLabelProviders = new JvmConnectionWrapperLabelProvider[]{
-			new JavaProcessLabelProvider(),
 			new CamelContextLabelProvider(),
 			new MavenLabelProvider(),
-			new KarafLabelProvider()
+			new KarafLabelProvider(),
+			new JavaProcessLabelProvider()
 	};
 	
 	private static class JavaProcessLabelProvider extends JvmConnectionWrapperLabelProvider {
 		public boolean accepts(IActiveJvm jvm) {
-			return isBlank(jvm.getMainClass());
+			// checked last, so always accepts
+			return true;
 		}
 		public Image getImage(IActiveJvm jvm) {
 			return Activator.getDefault().getSharedImages().image(LocalVMSharedImages.CONTAINER_GIF);
 		}
 		public String getDisplayString(IActiveJvm jvm) {
-			return "Java process";
+			if( isBlank(jvm.getMainClass())) 
+				return "Java Process";
+			return "Java Process: " + jvm.getMainClass(); 
 		}
 	}
 
