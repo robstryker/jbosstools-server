@@ -14,5 +14,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<module>org.jboss.ide.eclipse.as.management.as7.tests</module>
 		<module>org.jboss.ide.eclipse.as.integration.tests</module>
 	</modules>
+
+	<!-- by default, skip integration tests; enable these using -Pitests -->
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<configuration>
+					<skip>${itest.skip}</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+  </build>
+
 </project>
 	
