@@ -14,7 +14,7 @@
 		<systemProperties>-Dorg.jboss.tools.tests.skipPrivateRequirements=${skipPrivateRequirements}  </systemProperties>
 		<coverage.filter>org.jboss.ide.eclipse.as.core*</coverage.filter>
 		<emma.instrument.bundles>org.jboss.ide.eclipse.as.core</emma.instrument.bundles>
-                <surefire.timeout>10800</surefire.timeout>
+    <surefire.timeout>10800</surefire.timeout>
 	</properties>
 	
 	<build>

@@ -12,16 +12,13 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<properties>
-		<!-- can set a different path with -Djbosstools.test.jre.7= , see ci profile-->
-		<jbosstools.test.jre.7></jbosstools.test.jre.7>
-		<jbosstools.test.jre.8></jbosstools.test.jre.8>
-
 		<!-- some variables for tomcat testing so we don't have to hard code here AND in AbstractTomcatDetectionTest -->
 		<!-- Tomcat 6 version is not necessarily the latest as we need to use a *stable* url (from http://archive.apache.org/dist/)-->
 		<jbosstools.test.tomcat.version.6>6.0.39</jbosstools.test.tomcat.version.6>
 		<jbosstools.test.tomcat.version.7>7.0.54</jbosstools.test.tomcat.version.7>
 		<jbosstools.test.tomcat.version.8>8.0.8</jbosstools.test.tomcat.version.8>
 
+		<!-- jbosstools.test.jre.7 is defined in root pom for convenience of reuse -->
 		<systemProperties> -Djbosstools.test.jre.7=${jbosstools.test.jre.7} -Djbosstools.test.jre.8=${jbosstools.test.jre.8} -Dbasedir=${project.basedir} -Djbosstools.test.tomcat.version.6=${jbosstools.test.tomcat.version.6} -Djbosstools.test.tomcat.version.7=${jbosstools.test.tomcat.version.7} -Djbosstools.test.tomcat.version.8=${jbosstools.test.tomcat.version.8} </systemProperties>
 	</properties>
 	<build>
@@ -125,17 +122,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-  <profiles>
-  <profile>
-      <id>ci</id>
-      <activation>
-      <property><name>BUILD_NUMBER</name></property>
-      </activation>
-      <properties>
-		<!-- can set a different path with -Djbosstools.test.jre.7= -->
-		<jbosstools.test.jre.7>/qa/tools/opt/jdk1.7.0_last</jbosstools.test.jre.7>
-		<jbosstools.test.jre.8>/qa/tools/opt/jdk1.8.0_last</jbosstools.test.jre.8>
-      </properties>
-    </profile>
-  </profiles>
 </project>

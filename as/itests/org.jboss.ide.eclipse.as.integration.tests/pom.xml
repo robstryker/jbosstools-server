@@ -10,7 +10,6 @@
 	<artifactId>org.jboss.ide.eclipse.as.integration.tests</artifactId> 
 	<packaging>eclipse-test-plugin</packaging>
 	<properties>
-		<!-- jbosstools.test.jre.7 defined in ../pom.xml so it's available to all tests -->
 		<jbosstools.test.jboss.home.7.0>${requirementsDirectory}/jboss-as-7.0.0.Final</jbosstools.test.jboss.home.7.0>
 		<jbosstools.test.jboss.home.7.1>${requirementsDirectory}/jboss-as-7.1.0.Final</jbosstools.test.jboss.home.7.1>
 		<jbosstools.test.jboss.home.8.0>${requirementsDirectory}/wildfly-8.0.0.Final</jbosstools.test.jboss.home.8.0>
@@ -21,6 +20,7 @@
 		<jbosstools.test.jboss.home.eap.6.3>${requirementsDirectory}/jboss-eap-6.3</jbosstools.test.jboss.home.eap.6.3>
 		<!-- skipPrivateRequirements is inherited from parent pom -->
 
+		<!-- jbosstools.test.jre.7 is defined in root pom for convenience of reuse -->
 		<systemProperties> -Djbosstools.test.jre.7=${jbosstools.test.jre.7} -Djbosstools.test.jboss.home.7.0=${jbosstools.test.jboss.home.7.0} -Djbosstools.test.jboss.home.7.1=${jbosstools.test.jboss.home.7.1} -Djbosstools.test.jboss.home.8.0=${jbosstools.test.jboss.home.8.0} -Djbosstools.test.jboss.home.8.1=${jbosstools.test.jboss.home.8.1} -Djbosstools.test.jboss.home.eap.6.0=${jbosstools.test.jboss.home.eap.6.0} -Djbosstools.test.jboss.home.eap.6.1=${jbosstools.test.jboss.home.eap.6.1} -Djbosstools.test.jboss.home.eap.6.2=${jbosstools.test.jboss.home.eap.6.2} -Djbosstools.test.jboss.home.eap.6.3=${jbosstools.test.jboss.home.eap.6.3} -Dorg.jboss.tools.tests.skipPrivateRequirements=${skipPrivateRequirements} </systemProperties>
 	</properties>
 	<build>
