@@ -26,16 +26,16 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	SubsystemSuite.class,
-	ParametizedSuite.class,
-	RuntimeSuite.class,
-	PollThreadTest.class,
+//	SubsystemSuite.class,
+//	ParametizedSuite.class,
+//	RuntimeSuite.class,
+//	PollThreadTest.class,
+//	ClasspathSuite.class,
+//	RuntimeDetectionTest.class,
+//	CatalogMissingEntriesTest.class,
+//	CatalogValidationTest.class,
+//	UtilsSuite.class,
 	LaunchProjectOnJPP6Test.class,
-	ClasspathSuite.class,
-	RuntimeDetectionTest.class,
-	CatalogMissingEntriesTest.class,
-	CatalogValidationTest.class,
-	UtilsSuite.class,
 })
 public class ASToolsUnitTestSuite {
 }
