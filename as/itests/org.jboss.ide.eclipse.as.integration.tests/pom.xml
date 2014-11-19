@@ -78,6 +78,7 @@
 									<type>zip</type>
 								</artifactItem>
 							</artifactItems>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 				</executions>
@@ -97,6 +98,7 @@
 							<url>http://repository.jboss.org/sourceforge/jboss-3.2.8.SP1.zip</url>
 							<md5>97147374ee5b048e4462c7ebaf3cccb5</md5>
 							<unpack>true</unpack>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 					<execution>
@@ -109,6 +111,7 @@
 							<url>http://repository.jboss.org/sourceforge/jboss-4.0.5.GA.zip</url>
 							<md5>a39e85981958fea2411e9346e218aa39</md5>
 							<unpack>true</unpack>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 					<execution>
@@ -121,6 +124,7 @@
 							<url>http://repository.jboss.org/sourceforge/jboss-5.0.1.GA.zip</url>
 							<md5>dd308175c43796db824692cb0cdea82d</md5>
 							<unpack>true</unpack>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 					<execution>
@@ -133,6 +137,7 @@
 							<url>http://repository.jboss.org/sourceforge/jboss-5.1.0.GA.zip</url>
 							<md5>78322c75ca0c13002a04418b4a8bc920</md5>
 							<unpack>true</unpack>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 					<execution>
@@ -224,6 +229,7 @@
 							<url>http://download.jboss.org/wildfly/8.0.0.Final/wildfly-8.0.0.Final.zip</url>
 							<md5>9df208525e7c8c03bd592a6a0f554bea</md5>
 							<unpack>true</unpack>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 					<execution>
@@ -236,6 +242,7 @@
 							<url>http://download.jboss.org/wildfly/8.1.0.Final/wildfly-8.1.0.Final.zip</url>
 							<md5>b7df11f92ee80155702a351aee4b003b</md5>
 							<unpack>true</unpack>
+							<skip>${itest.skip}</skip>
 						</configuration>
 					</execution>
 				</executions>

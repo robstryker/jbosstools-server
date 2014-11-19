@@ -20,12 +20,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	ServerHomeTest.class, 
 	CreateServerCheckDefaultsTest.class,
-//	ProjectRuntimeClasspathTest.class,
-//	ServerBeanLoaderIntegrationTest.class,
-//	PublishingSuite.class,
-//	RepublishDefectTest.class,
-//	RuntimeJarUtilityTest.class,
-//	EJB3SupportVerifierTest.class,
+	ProjectRuntimeClasspathTest.class,
+	ServerBeanLoaderIntegrationTest.class,
+	PublishingSuite.class,
+	RepublishDefectTest.class,
+	RuntimeJarUtilityTest.class,
+	EJB3SupportVerifierTest.class,
 })
 public class ASToolsIntegrationTestSuite {
 }
