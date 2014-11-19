@@ -32,25 +32,6 @@
 		<module>site</module>
 	</modules>
 
-	<build>
-	  <plugins>
-            <plugin>
-              <groupId>org.eclipse.tycho</groupId>
-              <artifactId>tycho-surefire-plugin</artifactId>
-              <configuration>
-                  <includes>
-                    <include>**/*TestSuite.class</include>
-                    <include>**/*AllTests.class</include>
-                  </includes>
-                  <excludes>
-                    <exclude>**/Abstract*.class</exclude>
-                    <exclude>**/*IntegrationTestSuite.class</exclude>
-                  </excludes>
-                </configuration>
-              </plugin>	
-	  </plugins>
-	</build>
-
 	<profiles>
 		<!-- used to set default when running in JBoss Jenkins -->
 	  <profile>
@@ -75,24 +56,6 @@
 				<itest.skip>false</itest.skip>
 				<skipPrivateRequirements>false</skipPrivateRequirements>
 			</properties>
-			<build>
-			  <plugins>
-		            <plugin>
-		              <groupId>org.eclipse.tycho</groupId>
-		              <artifactId>tycho-surefire-plugin</artifactId>
-		              <configuration>
-		                  <includes>
-		                    <include>**/*IntegrationTestSuite.class</include>
-		                    <include>**/*TestSuite.class</include>
-		                    <include>**/*AllTests.class</include>
-		                  </includes>
-		                  <excludes>
-		                    <exclude>**/Abstract*.class</exclude>
-		                  </excludes>
-		                </configuration>
-		              </plugin>	
-			  </plugins>
-			</build>
 		</profile>
 	</profiles>
 
