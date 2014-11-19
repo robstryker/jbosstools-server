@@ -22,10 +22,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	CreateServerCheckDefaultsTest.class,
 	ProjectRuntimeClasspathTest.class,
 	ServerBeanLoaderIntegrationTest.class,
-//	PublishingSuite.class,
-//	RepublishDefectTest.class,
-//	RuntimeJarUtilityTest.class,
-//	EJB3SupportVerifierTest.class,
+	PublishingSuite.class,
+	RepublishDefectTest.class,
+	RuntimeJarUtilityTest.class,
+	EJB3SupportVerifierTest.class,
 })
 public class ASToolsIntegrationTestSuite {
 }
