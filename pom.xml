@@ -21,6 +21,8 @@
 		<jbosstools.test.jre.8></jbosstools.test.jre.8>
 		<!-- by default, skip running the integration tests -->
 		<itest.skip>true</itest.skip>
+		<!-- by default, don't download stuff we only need for the integration tests -->
+		<skipPrivateRequirements>true</skipPrivateRequirements>
  	</properties>
 	<modules>
 		<module>archives</module>
@@ -71,6 +73,7 @@
 				<!-- timeout in seconds; 3000s = 50m -->
 				<surefire.timeout>3000</surefire.timeout>
 				<itest.skip>false</itest.skip>
+				<skipPrivateRequirements>false</skipPrivateRequirements>
 			</properties>
 			<build>
 			  <plugins>
