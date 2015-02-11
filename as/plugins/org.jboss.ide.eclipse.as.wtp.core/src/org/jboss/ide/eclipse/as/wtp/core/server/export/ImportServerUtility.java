@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.jboss.ide.eclipse.archives.core.util.internal.TrueZipUtil;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.RuntimePropertyImporter;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ServerLaunchPropertyImporter;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ServerPropertyImporter;
 
 public class ImportServerUtility {
@@ -52,7 +53,7 @@ public class ImportServerUtility {
 		return new IServerImportParticipant[] {
 				new RuntimePropertyImporter(), 
 				new ServerPropertyImporter(), 
-//				new ServerLaunchPropertyImporter()
+				new ServerLaunchPropertyImporter()
 		};
 	}
 	
