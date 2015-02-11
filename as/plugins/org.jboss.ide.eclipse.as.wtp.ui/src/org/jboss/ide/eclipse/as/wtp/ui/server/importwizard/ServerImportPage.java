@@ -48,7 +48,7 @@ public class ServerImportPage extends WizardPage {
 		dest.setLayoutData(new GridData (SWT.FILL, SWT.CENTER, true, false));
 		dest.setLayout(new GridLayout(3, false));
 		Label l = new Label(dest, SWT.NONE);
-		l.setText("Destination: ");
+		l.setText("Source file: ");
 		final Text t = new Text(dest, SWT.BORDER);
 		Button browse = new Button(dest, SWT.PUSH);
 		browse.setText("Browse...");
