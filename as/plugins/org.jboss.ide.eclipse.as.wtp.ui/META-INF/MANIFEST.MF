@@ -46,3 +46,4 @@ Export-Package: org.jboss.ide.eclipse.as.wtp.ui,
  org.jboss.ide.eclipse.as.wtp.ui.profile,
  org.jboss.ide.eclipse.as.wtp.ui.util,
  org.jboss.ide.eclipse.as.wtp.ui.wizard
+Import-Package: org.eclipse.ui.dialogs

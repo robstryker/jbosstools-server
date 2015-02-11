@@ -162,6 +162,19 @@
                type="org.eclipse.ui.views.properties.IPropertySheetPage">
          </adapter>
       </factory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="org.jboss.ide.eclipse.as.wtp.ui.server"
+            name="server">
+      </category>
+      <wizard
+            category="server"
+            class="org.jboss.ide.eclipse.as.wtp.ui.server.export.ServerExportWizard"
+            id="org.jboss.ie.eclipse.as.wtp.ui.server.exportWizard"
+            name="Server">
+      </wizard>
    </extension> 
     
 </plugin>

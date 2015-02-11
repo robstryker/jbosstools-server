@@ -14,6 +14,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.wst.server.core.IModule;
 import org.eclipse.wst.server.core.IRuntime;
 import org.eclipse.wst.server.core.IServer;
@@ -24,11 +25,17 @@ import org.jboss.ide.eclipse.as.ui.actions.ExploreUtils;
 import org.jboss.ide.eclipse.as.ui.subsystems.IExploreBehavior;
 import org.jboss.ide.eclipse.as.wtp.core.server.behavior.AbstractSubsystemController;
 import org.jboss.ide.eclipse.as.wtp.core.server.behavior.IControllableServerBehavior;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.ImportServerUtility;
 import org.jboss.tools.as.core.server.controllable.systems.IDeploymentOptionsController;
 import org.jboss.tools.as.core.server.controllable.systems.IModuleDeployPathController;
 
 public class LocalExploreBehavior extends AbstractSubsystemController implements IExploreBehavior {
 	public boolean canExplore(IServer server, IModule[] module) {
+		// TODO do not commit this
+		//new ExportServerUtility(new File("/home/rob/test1.jar")).exportServer(server, new NullProgressMonitor());
+		new ImportServerUtility(new File("/home/rob/test1.jar")).importServer(new NullProgressMonitor());
+		
+		
 		if( module != null )
 			return canExploreModule(server, module);
 		return canExploreServer(server);

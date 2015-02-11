@@ -11,6 +11,8 @@
 package org.jboss.ide.eclipse.archives.core.util.internal;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.eclipse.core.runtime.IPath;
 
@@ -61,6 +63,17 @@ public class TrueZipUtil {
 		return  b && (updateTimestamps ? updateParentTimestamps(file) : true);
 	}
 
+	public static boolean writeFile(InputStream source, de.schlichtherle.io.File file, boolean updateTimestamps) {
+		file.getParentFile().mkdirs();
+		boolean b = file.catFrom(source);
+		return  b && (updateTimestamps ? updateParentTimestamps(file) : true);
+	}
+
+	public static boolean readFile(OutputStream destination, de.schlichtherle.io.File file) {
+		return file.catTo(destination);
+	}
+
+	
 	public static boolean touchFile(IPath path) {
 		de.schlichtherle.io.File f = getFile(path);
 		boolean b = f.setLastModified(System.currentTimeMillis());
