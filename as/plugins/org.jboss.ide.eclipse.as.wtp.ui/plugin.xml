@@ -167,12 +167,27 @@
          point="org.eclipse.ui.exportWizards">
       <category
             id="org.jboss.ide.eclipse.as.wtp.ui.server"
-            name="server">
+            name="Server"
+            parentCategory="org.jboss.ide.eclipse.as.wtp.ui.server">
       </category>
       <wizard
             category="server"
             class="org.jboss.ide.eclipse.as.wtp.ui.server.export.ServerExportWizard"
             id="org.jboss.ie.eclipse.as.wtp.ui.server.exportWizard"
+            name="Server">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="org.jboss.ide.eclipse.as.wtp.ui.server.import"
+            name="Server"
+            parentCategory="org.jboss.ide.eclipse.as.wtp.ui.server.import">
+      </category>
+      <wizard
+            category="server"
+            class="org.jboss.ide.eclipse.as.wtp.ui.server.importwizard.ServerImportWizard"
+            id="org.jboss.ie.eclipse.as.wtp.ui.server.importWizard"
             name="Server">
       </wizard>
    </extension> 
