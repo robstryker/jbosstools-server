@@ -1,21 +1,22 @@
 package org.jboss.ide.eclipse.as.wtp.core.server.export.internal;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationType;
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.internal.core.LaunchConfiguration;
-import org.eclipse.debug.internal.core.LaunchConfigurationInfo;
+import org.eclipse.debug.internal.core.LaunchManager;
 import org.eclipse.wst.server.core.IServer;
-import org.eclipse.wst.server.core.internal.ServerType;
+import org.jboss.ide.eclipse.as.wtp.core.ASWTPToolsPlugin;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipant;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.ImportServerUtility;
 
@@ -29,25 +30,27 @@ public class ServerLaunchPropertyImporter implements IServerImportParticipant {
 			if( contents != null )  {
 				IServer s = (IServer)utility.getSharedData(utility.SERVER_KEY);
 				
-				// Create launch config
+				// Get the name for a temporary .launch file to write out to
 				ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
-				ILaunchConfiguration lc = s.getLaunchConfiguration(true, new NullProgressMonitor());
-				IFileStore fs = ((LaunchConfiguration)lc).getFileStore();
-				lc.delete();
+				String launchName = getValidLaunchConfigurationName(s.getName());
+				launchName = launchManager.generateUniqueLaunchConfigurationNameFrom(launchName); 
+				String launchFileName = launchName + ".launch";
 				
-				
-				// write the file
-				OutputStream os = fs.openOutputStream(0, new NullProgressMonitor());
+				// persist this to a temporary file
+				IPath p = ASWTPToolsPlugin.getDefault().getStateLocation().append(".import").append(".launch");
+				p.toFile().mkdirs();
+				IPath filePath = p.append(launchFileName);
+				File file =filePath.toFile();
+				OutputStream os = new FileOutputStream(file);
 				try {
 					os.write(contents.getBytes());
 				} finally {
 					os.close();
 				}
 				
-				lc.hasAttribute("test");
+				// Instruct the launch manager to import it
+				((LaunchManager)launchManager).importConfigurations(new File[]{file}, new NullProgressMonitor());
 				
-				
-				//s.getLaunchConfiguration(true, new NullProgressMonitor());
 			}
 		} catch(IOException ioe) {
 			ioe.printStackTrace(); // TODO 
