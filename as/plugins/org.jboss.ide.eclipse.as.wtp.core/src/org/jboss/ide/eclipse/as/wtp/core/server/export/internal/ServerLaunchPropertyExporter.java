@@ -16,9 +16,9 @@ import org.eclipse.wst.server.core.internal.Server;
 import org.eclipse.wst.server.core.internal.ServerWorkingCopy;
 import org.eclipse.wst.server.core.internal.XMLMemento;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.ExportServerUtility;
-import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerExportParticipant;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerExportParticipantDelegate;
 
-public class ServerLaunchPropertyExporter implements IServerExportParticipant {
+public class ServerLaunchPropertyExporter implements IServerExportParticipantDelegate {
 	public void export(IServer server, ExportServerUtility utility, IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Saving server launch configuration", 100);
 		try {

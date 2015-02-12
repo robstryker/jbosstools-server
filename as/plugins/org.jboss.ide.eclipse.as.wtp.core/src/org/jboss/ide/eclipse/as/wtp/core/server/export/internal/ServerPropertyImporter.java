@@ -14,11 +14,11 @@ import org.eclipse.wst.server.core.IServerWorkingCopy;
 import org.eclipse.wst.server.core.ServerCore;
 import org.eclipse.wst.server.core.internal.IMemento;
 import org.eclipse.wst.server.core.internal.XMLMemento;
-import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipant;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipantDelegate;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.ImportServerUtility;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.RuntimePropertyImporter.PublicBase;
 
-public class ServerPropertyImporter implements IServerImportParticipant {
+public class ServerPropertyImporter implements IServerImportParticipantDelegate {
 
 	public void importFrom(ImportServerUtility utility, IProgressMonitor monitor)
 			throws CoreException {

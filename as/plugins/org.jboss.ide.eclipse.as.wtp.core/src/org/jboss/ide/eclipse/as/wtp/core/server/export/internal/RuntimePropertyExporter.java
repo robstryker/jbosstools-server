@@ -11,9 +11,9 @@ import org.eclipse.wst.server.core.internal.Runtime;
 import org.eclipse.wst.server.core.internal.RuntimeWorkingCopy;
 import org.eclipse.wst.server.core.internal.XMLMemento;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.ExportServerUtility;
-import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerExportParticipant;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerExportParticipantDelegate;
 
-public class RuntimePropertyExporter implements IServerExportParticipant {
+public class RuntimePropertyExporter implements IServerExportParticipantDelegate {
 	public void export(IServer server, ExportServerUtility utility, IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Saving runtime properties", 100);
 		try {

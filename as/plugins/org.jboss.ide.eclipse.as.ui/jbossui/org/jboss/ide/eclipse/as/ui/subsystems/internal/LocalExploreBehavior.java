@@ -31,11 +31,6 @@ import org.jboss.tools.as.core.server.controllable.systems.IModuleDeployPathCont
 
 public class LocalExploreBehavior extends AbstractSubsystemController implements IExploreBehavior {
 	public boolean canExplore(IServer server, IModule[] module) {
-		// TODO do not commit this
-		//new ExportServerUtility(new File("/home/rob/test1.jar")).exportServer(server, new NullProgressMonitor());
-		new ImportServerUtility(new File("/home/rob/test1.jar")).importServer(new NullProgressMonitor());
-		
-		
 		if( module != null )
 			return canExploreModule(server, module);
 		return canExploreServer(server);

@@ -17,10 +17,10 @@ import org.eclipse.debug.internal.core.LaunchConfiguration;
 import org.eclipse.debug.internal.core.LaunchManager;
 import org.eclipse.wst.server.core.IServer;
 import org.jboss.ide.eclipse.as.wtp.core.ASWTPToolsPlugin;
-import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipant;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipantDelegate;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.ImportServerUtility;
 
-public class ServerLaunchPropertyImporter implements IServerImportParticipant {
+public class ServerLaunchPropertyImporter implements IServerImportParticipantDelegate {
 
 	public void importFrom(ImportServerUtility utility, IProgressMonitor monitor)
 			throws CoreException {

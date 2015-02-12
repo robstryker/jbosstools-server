@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.server.core.IServer;
 import org.jboss.ide.eclipse.archives.core.util.internal.TrueZipUtil;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ImportExportExtensionManager;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.RuntimePropertyExporter;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ServerLaunchPropertyExporter;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ServerPropertyExporter;
@@ -24,7 +25,7 @@ public class ExportServerUtility {
 	public boolean exportServer(IServer server, IProgressMonitor monitor) {
 		output.delete();
 		TrueZipUtil.createArchive(new Path(output.getAbsolutePath()));
-		IServerExportParticipant[] all = getParticipants();
+		IServerExportParticipantDelegate[] all = getParticipants();
 		monitor.beginTask("Exporting Server: " + server.getName(), all.length * 100);
 		try {
 			for( int i = 0; i < all.length; i++ ) {
@@ -40,9 +41,12 @@ public class ExportServerUtility {
 	}
 	
 	private IServerExportParticipant[] getParticipants() {
-		return new IServerExportParticipant[] {
-				new RuntimePropertyExporter(), new ServerPropertyExporter(), new ServerLaunchPropertyExporter()
-		};
+		return ImportExportExtensionManager.getDefault().getExportParticipants();
+//		return new IServerExportParticipant[] {
+//				new RuntimePropertyExporter(), 
+//				new ServerPropertyExporter(), 
+//				new ServerLaunchPropertyExporter()
+//		};
 	}
 	
 	public void write(String path, byte[] contents) throws IOException {

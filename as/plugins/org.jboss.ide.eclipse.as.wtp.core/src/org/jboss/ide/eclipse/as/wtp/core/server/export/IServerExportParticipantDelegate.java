@@ -4,8 +4,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.wst.server.core.IServer;
 
-public interface IServerExportParticipant extends IServerExportParticipantDelegate {
-	public String getId();
-	public int getWeight();
+public interface IServerExportParticipantDelegate {
 	public void export(IServer server, ExportServerUtility utility, IProgressMonitor monitor) throws CoreException;
 }

@@ -19,10 +19,10 @@ import org.eclipse.wst.server.core.internal.Base;
 import org.eclipse.wst.server.core.internal.IMemento;
 import org.eclipse.wst.server.core.internal.RuntimeWorkingCopy;
 import org.eclipse.wst.server.core.internal.XMLMemento;
-import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipant;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.IServerImportParticipantDelegate;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.ImportServerUtility;
 
-public class RuntimePropertyImporter implements IServerImportParticipant {
+public class RuntimePropertyImporter implements IServerImportParticipantDelegate {
 
 	public void importFrom(ImportServerUtility utility, IProgressMonitor monitor)
 			throws CoreException {

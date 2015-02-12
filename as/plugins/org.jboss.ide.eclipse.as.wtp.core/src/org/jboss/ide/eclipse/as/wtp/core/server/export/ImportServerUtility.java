@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.jboss.ide.eclipse.archives.core.util.internal.TrueZipUtil;
+import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ImportExportExtensionManager;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.RuntimePropertyImporter;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ServerLaunchPropertyImporter;
 import org.jboss.ide.eclipse.as.wtp.core.server.export.internal.ServerPropertyImporter;
@@ -35,7 +36,7 @@ public class ImportServerUtility {
 		sharedData = new HashMap<String, Object>();
 	}
 	public boolean importServer(IProgressMonitor monitor) {
-		IServerImportParticipant[] all = getParticipants();
+		IServerImportParticipantDelegate[] all = getParticipants();
 		monitor.beginTask("Importing Server from file: " + jar.getName(), all.length * 100);
 		try {
 			for( int i = 0; i < all.length; i++ ) {
@@ -50,11 +51,12 @@ public class ImportServerUtility {
 	}
 	
 	private IServerImportParticipant[] getParticipants() {
-		return new IServerImportParticipant[] {
-				new RuntimePropertyImporter(), 
-				new ServerPropertyImporter(), 
-				new ServerLaunchPropertyImporter()
-		};
+		return ImportExportExtensionManager.getDefault().getImportParticipants();
+//		return new IServerImportParticipant[] {
+//				new RuntimePropertyImporter(), 
+//				new ServerPropertyImporter(), 
+//				new ServerLaunchPropertyImporter()
+//		};
 	}
 	
 	
