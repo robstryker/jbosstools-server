@@ -116,7 +116,7 @@ public class TruezipUtilTest extends TestCase {
 		assertFalse(TrueZipUtil.pathExists(archiveArchive));
 		TrueZipUtil.createFolder(archiveFolder);
 		TrueZipUtil.createArchive(archiveArchive);
-		try {de.schlichtherle.io.File.umount();} catch( Exception e ) {}
+		try { TrueZipUtil.umount();} catch( Exception e ) {}
 		assertTrue(TrueZipUtil.pathExists(archiveFolder));
 		assertTrue(TrueZipUtil.pathExists(archiveArchive));
 		assertFalse(archiveFolder.toFile().exists());
@@ -127,7 +127,7 @@ public class TruezipUtilTest extends TestCase {
 		assertFalse(TrueZipUtil.pathExists(folderArchive));
 		TrueZipUtil.createFolder(folderFolder);
 		TrueZipUtil.createArchive(folderArchive);
-		try {de.schlichtherle.io.File.umount();} catch( Exception e ) {}
+		try { TrueZipUtil.umount();} catch( Exception e ) {}
 		assertTrue(TrueZipUtil.pathExists(archiveFolder));
 		assertTrue(TrueZipUtil.pathExists(archiveArchive));
 		assertTrue(folderFolder.toFile().exists());

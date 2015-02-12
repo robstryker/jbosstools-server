@@ -81,6 +81,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 
 	@Test
 	public void testPublish() throws Exception { 
+		printTestName();
 		CustomPublishController controller = new CustomPublishController();
 		controller.initialize(server, null, null);
 		int result = controller.publishModule(IServer.PUBLISH_INCREMENTAL, ServerBehaviourDelegate.ADDED, module, null);
@@ -93,6 +94,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 
 	@Test
 	public void testPublishModuleDNE() throws Exception {  // module does not exist, so no action should be taken
+		printTestName();
 		((MockModule)module[0]).setExists(false);
 		CustomPublishController controller = new CustomPublishController();
 		controller.initialize(server, null, null);
@@ -116,6 +118,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 	 */
 	@Test
 	public void testBinaryModulePublish() throws Exception { 
+		printTestName();
 		module = createSimpleMockBinaryWebModule();
 		((MockModule)module[0]).setExists(true);
 		((MockModule)module[0]).setBinary(true);
@@ -133,6 +136,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 	// Force nested zips
 	@Test
 	public void testUtilInWebMockModule() throws Exception {  
+		printTestName();
 		module = createUtilInWebMockModule();
 		((MockModule)module[0]).setExists(true);
 		((MockModule)module[0]).setExternal(true);
@@ -169,6 +173,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 
 	@Test
 	public void testUtilInWebInEarMockModule() throws Exception { 
+		printTestName();
 		module = createUtilInWebInEarMockModule();
 		((MockModule)module[0]).setExists(true);
 		((MockModule)module[0]).setExternal(true);
@@ -205,6 +210,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 	
 	@Test
 	public void testUtilInWebInEarRestartModule() throws Exception { 
+		printTestName();
 		module = createUtilInWebInEarMockModule();
 		((MockModule)module[0]).setExists(true);
 		((MockModule)module[0]).setBinary(false);
@@ -293,6 +299,7 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 	
 	@Test
 	public void testUtilInWebInEarRemovals() throws Exception {  // module does not exist, so no action should be taken
+		printTestName();
 		testUtilInWebInEarMockModule();
 		CustomPublishController controller = new CustomPublishController();
 		controller.initialize(server, null, null);
@@ -476,6 +483,17 @@ public class StandardFilesystemPublishControllerTest extends AbstractPublishingT
 			list2.add(root.append(i.next()));
 		}
 		super.verifyList(root, list2, exists);
+	}
+	
+	protected void printTestName() {
+		Exception e = new Exception();
+		try {
+			throw e;
+		} catch(Exception e2) {
+			e2.fillInStackTrace();
+			StackTraceElement[] stack = e2.getStackTrace();
+			System.out.println(stack[1].getMethodName());
+		}
 	}
 	
 }

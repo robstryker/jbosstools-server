@@ -79,10 +79,11 @@ public final class XMLMemento implements IMemento {
 		Document document = null;
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setIgnoringComments(true);
+			factory.setIgnoringComments(true); // NOT in foundation
 			DocumentBuilder parser = factory.newDocumentBuilder();
 			document = parser.parse(new InputSource(in));
 			Node node = document.getFirstChild();
+			// Missing lines from foundation in case first element is a comment
 			if (node instanceof Element)
 				return new XMLMemento(document, (Element) node);
 		} catch (Exception e) {

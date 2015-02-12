@@ -5,6 +5,6 @@
 	<classpathentry kind="src" path="src/main"/>
 	<classpathentry kind="src" path="src/xml"/>
 	<classpathentry kind="src" path="src/eclipse"/>
-	<classpathentry exported="true" kind="lib" path="lib/truezip-6.6.jar" sourcepath="/home/rob/code/truezip/truezip/src"/>
+	<classpathentry exported="true" kind="lib" path="lib/truezip-6.6.jar" sourcepath="/home/rob/code/truezip_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
