@@ -8,13 +8,13 @@ import org.jboss.ide.eclipse.as.core.server.bean.AbstractCondition;
 import org.jboss.ide.eclipse.as.core.server.bean.ServerBeanType;
 import org.jboss.ide.eclipse.as.core.server.bean.ServerBeanTypeUnknownAS72Product.UnknownAS72ProductServerTypeCondition;
 
-public class DataVirtualization6ServerBeanType extends ServerBeanType {
+public class DataVirtualization6ServerBeanType extends JBossServerType {
 	public DataVirtualization6ServerBeanType() {
 		super(
 				"DV",//$NON-NLS-1$
 				"JBoss Data Virtualization",//$NON-NLS-1$
 				asPath("modules", "system", "layers", "base", "org", "jboss", "as", "server", "main"),
-				new DV6Condition());
+				new String[]{}, new DV6Condition());
 	}	
 	
 	@Override
