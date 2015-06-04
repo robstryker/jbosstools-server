@@ -1,0 +1,4 @@
+provides.0.namespace=org.jboss.tools.wtp.server.launchbar.p2.spells
+provides.0.name=onInstall
+provides.0.version=1.0.0
+

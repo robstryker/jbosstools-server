@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<description>
+	To install these features, point Eclipse at this site.
+	</description>
+
+	<category-def label="JBoss Tools Server Nightly Build Update Site" name="AllFeatures">
+		<description>JBoss Tools Server Nightly Build Update Site: contains all features in this build.</description>
+	</category-def>
+	<category-def label="JBoss Tools Server Nightly Build Update Site" name="AllSources">
+		<description>JBoss Tools Server Nightly Build Update Site: contains all source features in this build.</description>
+	</category-def>
+
+
+<!-- wtp -->
+
+	<feature id="org.jboss.tools.wtp.server.launchbar.feature">
+		<category name="AllFeatures"/>
+	</feature>
+
+	<!-- sources -->
+        <feature id="org.jboss.tools.wtp.server.launchbar.feature.source">
+                <category name="AllFeatures"/>
+        </feature>
+</site>
+

@@ -1,0 +1,5 @@
+metaRequirements.0.namespace=org.jboss.tools.wtp.server.launchbar.p2.spells
+metaRequirements.0.name=onInstall
+
+instructions.install=org.jboss.tools.wtp.server.launchbar.p2.spells.onInstall();
+
