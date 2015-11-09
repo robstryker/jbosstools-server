@@ -205,7 +205,7 @@ public class ServerUtil {
 	public static IServer findServer(String name) {
 		IServer[] servers = ServerCore.getServers();
 		for( int i = 0; i < servers.length; i++ ) {
-			if (name.trim().equals(servers[i].getName()))
+			if (name.trim().equals(servers[i].getName().trim()))
 				return servers[i];
 		}
 		return null;
