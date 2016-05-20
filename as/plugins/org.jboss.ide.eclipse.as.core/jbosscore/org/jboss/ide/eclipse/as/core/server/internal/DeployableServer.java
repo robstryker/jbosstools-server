@@ -51,13 +51,17 @@ public class DeployableServer extends ServerDelegate implements IDeployableServe
 	protected void initialize() {
 	}
 	
-	public void setDefaults(IProgressMonitor monitor) {
+	public void setDefaultServerName(IProgressMonitor monitor) {
 		IRuntime rt = getServer().getRuntime();
 		if( rt != null ) {
 			getServerWorkingCopy().setName(ServerNamingUtility.getDefaultServerName(rt));
 		} else {
 			getServerWorkingCopy().setName(ServerNamingUtility.getNextShortServerName(getServer().getServerType()));
 		}
+	}
+	
+	public void setDefaults(IProgressMonitor monitor) {
+		setDefaultServerName(monitor);
 		setAttribute(IJBossToolingConstants.IGNORE_LAUNCH_COMMANDS, true);
 		getServerWorkingCopy().setHost("localhost"); //$NON-NLS-1$
 	}
