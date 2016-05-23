@@ -183,11 +183,11 @@
             order="10"
             typeIds="%AllJBossServerTypes"/>
       <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection"
             id="org.jboss.ide.eclipse.as.ui.editor.portSection"
             insertionId="org.eclipse.wst.server.editor.overview.right"
             order="11"
-            typeIds="%AllJBossServerTypes"/>
+            typeIds="%AllJBTServerTypes"/>
       <section
             class="org.jboss.ide.eclipse.as.ui.editor.ServerPasswordSection"
             id="org.jboss.ide.eclipse.as.ui.editor.passwordSection"
@@ -254,27 +254,27 @@
    <extension
          point="org.jboss.ide.eclipse.as.ui.ServerEditorPortSection">
       <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection$JBoss7PortOffsetEditorExtension"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss7PortOffsetEditorExtension"
             serverIds="%ServerTypesJBoss7OrHigher">
       </section>
       <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection$JNDIPortEditorExtension"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JNDIPortEditorExtension"
             serverIds="%ServerTypesJBoss6OrLower">
       </section>
       <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection$WebPortEditorExtension"
-            serverIds="%AllJBossServerTypes">
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$WebPortEditorExtension"
+            serverIds="%AllJBTServerTypes">
       </section>
       <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection$JBoss6JMXRMIPortEditorExtension"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss6JMXRMIPortEditorExtension"
             serverIds="org.jboss.ide.eclipse.as.60">
       </section>
       <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection$JBoss7ManagementPortEditorExtension"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss7ManagementPortEditorExtension"
             serverIds="%ServerTypesJBoss7">
       </section>
        <section
-            class="org.jboss.ide.eclipse.as.ui.editor.PortSection$JBoss7ManagementPortEditorExtension"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss7ManagementPortEditorExtension"
             serverIds="%ServerTypesWildfly">
       </section>
       
