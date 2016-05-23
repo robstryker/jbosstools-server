@@ -253,6 +253,14 @@
    </extension>
    <extension
          point="org.jboss.ide.eclipse.as.ui.ServerEditorPortSection">
+         <!-- deploy only server -->
+      <section
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$WebPortSettingEditorExtension"
+            serverIds="org.jboss.ide.eclipse.as.systemCopyServer">
+      </section>
+         
+         
+         
       <section
             class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss7PortOffsetEditorExtension"
             serverIds="%ServerTypesJBoss7OrHigher">
@@ -263,7 +271,7 @@
       </section>
       <section
             class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$WebPortEditorExtension"
-            serverIds="%AllJBTServerTypes">
+            serverIds="%AllJBossServerTypes">
       </section>
       <section
             class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss6JMXRMIPortEditorExtension"
@@ -276,6 +284,12 @@
        <section
             class="org.jboss.ide.eclipse.as.ui.editor.ports.PortSection$JBoss7ManagementPortEditorExtension"
             serverIds="%ServerTypesWildfly">
+      </section>
+
+      <section
+      		weight="150"
+            class="org.jboss.ide.eclipse.as.ui.editor.ports.DebugPortSection"
+            serverIds="%AllJBTServerTypes">
       </section>
       
       <!-- NEW_SERVER_ADAPTER  Add the new port sections in the server editor above this line -->

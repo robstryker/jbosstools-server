@@ -75,15 +75,14 @@ public abstract class PortEditorExtension implements IPortEditorExtension {
 		label.setText(labelText);
 	}
 	protected void initialize() {
-		boolean shouldDetect = getEditable();
-		text.setEnabled(!shouldDetect);
-		text.setEditable(!shouldDetect);
-		text.setText(helper.getAttribute(overrideValueKey, "")); //$NON-NLS-1$
+		boolean editable = getEditable();
+		text.setEnabled(editable);
+		text.setEditable(editable);
+		text.setText(helper.getAttribute(overrideValueKey, Integer.toString(defaultValue)));
 	}
 	
 	protected boolean getEditable() {
 		return true;
-		//return helper.getAttribute(detectXPathKey, true);
 	}
 	
 	protected int discoverOffset() {

@@ -169,6 +169,16 @@ public class PortSection extends ServerEditorSection {
 		}
 	}
 
+	public static class WebPortSettingEditorExtension extends PortEditorExtension {
+		public WebPortSettingEditorExtension() {
+			super(Messages.EditorWebPort, 
+					XPathsPortsController.WEB_PORT,
+					XPathsPortsController.JBOSS_WEB_DEFAULT_PORT,
+					Messages.EditorChangeWebCommandName);
+		}
+	}
+
+	
 	public static class JBoss6JMXRMIPortEditorExtension extends PortEditorXPathExtension {
 		public JBoss6JMXRMIPortEditorExtension() {
 			super(Messages.EditorJMXRMIPort, 

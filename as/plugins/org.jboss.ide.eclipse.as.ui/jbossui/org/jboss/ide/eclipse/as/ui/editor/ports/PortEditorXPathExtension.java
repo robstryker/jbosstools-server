@@ -12,13 +12,8 @@ package org.jboss.ide.eclipse.as.ui.editor.ports;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.fieldassist.ControlDecoration;
-import org.eclipse.jface.fieldassist.FieldDecoration;
-import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.VerifyEvent;
-import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -27,7 +22,6 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wst.server.ui.internal.command.ServerCommand;
-import org.jboss.ide.eclipse.as.core.util.ServerAttributeHelper;
 import org.jboss.ide.eclipse.as.ui.Messages;
 import org.jboss.ide.eclipse.as.ui.dialogs.ChangePortDialog;
 import org.jboss.ide.eclipse.as.ui.dialogs.ChangePortDialog.ChangePortDialogInfo;
@@ -37,9 +31,7 @@ public abstract class PortEditorXPathExtension extends PortEditorExtension {
 	protected Link link;
 	protected String currentXPathKey, detectXPathKey, defaultXPath;
 	protected String currentXPath;
-	protected PortSection section;
 	protected int defaultValue;
-	private ControlDecoration decoration;
 	
 	public PortEditorXPathExtension(String labelText, String currentXPathKey, 
 			String detectXPathKey, String overrideValueKey, String defaultXPath,
