@@ -57,7 +57,7 @@ public class DebugPortSection implements IPortEditorExtension {
 	public void createControl(Composite parent) {
 		String profile = ServerProfileModel.getProfile(helper.getOriginal());
 		final Button check = new Button(parent,SWT.CHECK);
-		check.setText("Launch remote debugger");
+		check.setText("Attach remote debugger");
 		GridData gd = new GridData();
 		gd.horizontalSpan = 4;
 		check.setLayoutData(gd);
